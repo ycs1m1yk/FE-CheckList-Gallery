@@ -5,5 +5,4 @@ export const GlobalStyle = createGlobalStyle`
   ${reset};
   html, body{
   }
-
 `;
