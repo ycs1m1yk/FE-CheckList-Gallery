@@ -3,15 +3,15 @@ import 'styled-components';
 declare module 'styled-components'{
     export interface DefaultTheme {
         palette:{
-            triconblack: String,
-            africanviolet: String,
-            daydream: String,
-            lobelia: String,
-            extrawhite: String,
+            triconblack: string,
+            africanviolet: string,
+            daydream: string,
+            lobelia: string,
+            extrawhite: string,
         }
         devices: {
-            desktop: String,
-            mobile: String
+            desktop: string,
+            mobile: string
         }
     }
 }
