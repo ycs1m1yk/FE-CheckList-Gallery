@@ -13,6 +13,7 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { IAllPostProps } from "../../types/interface";
+import Loader from "./Loader";
 
 const ButtonContainer = styled.div`
   text-align: center;
@@ -89,7 +90,7 @@ const Carousel = () => {
   }, []);
 
   return isLoading ? (
-    <div>Loading...</div>
+    <Loader />
   ) : (
     <Slider ref={sliderRef} {...settings}>
       {userPost.map((post) => (
