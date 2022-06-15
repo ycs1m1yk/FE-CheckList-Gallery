@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import SliderItem from "./SliderItem";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const GalleryContainer = styled.div``;
 
-const SliderContainer = styled.div``;
-
-const ImageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10rem 10rem;
-  background-color: #eeeeee;
-  width: 80%;
-  padding: 2rem;
-  border-radius: 50px;
-`;
-
-const Image = styled.img`
-  width: 60%;
-  height: 60%;
-`;
+interface IUserPost {
+  id: string;
+  imgUrl?: string;
+  tags?: [];
+  title?: string;
+}
 
 /*
   TODO
@@ -29,10 +22,19 @@ const Image = styled.img`
   3. Header와 Footer, Sidebar 완성되면 추가하고 디버깅 다시
   4. Loader Component 만들기
 */
+
 const Gallery = () => {
-  const [userPost, setUserPost] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [userPost, setUserPost] = useState<IUserPost[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState(null);
+
+  const settings = {
+    arrows: false,
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   // 유저의 작품 정보 얻어오기
   const getUserPostFromApi = async () => {
@@ -51,7 +53,6 @@ const Gallery = () => {
     getUserPostFromApi();
   }, []);
 
-  console.log(userPost);
   return (
     <>
       {isLoading ? (
@@ -62,7 +63,11 @@ const Gallery = () => {
           <GalleryContainer>
             {/* <Header /> */}
             {/* <Sidebar /> */}
-            <SliderContainer></SliderContainer>
+            <Slider {...settings}>
+              {userPost.map((post: IUserPost) => (
+                <SliderItem key={post.id} post={post} />
+              ))}
+            </Slider>
             {/* <Footer /> */}
           </GalleryContainer>
         </>
