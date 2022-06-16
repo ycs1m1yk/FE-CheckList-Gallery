@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { ICategoryListProps } from "../../types/interface";
+import { ICategoryListProps } from "../../types/PostInterface";
 import noImage from "../../images/noImage.jpeg";
 
 const Container = styled.div`
@@ -74,8 +74,10 @@ const SliderItemTag = styled(Link)`
 `;
 
 const SliderItem = ({ post }: any) => {
+  const navigate = useNavigate();
   const handleNavigate = () => {
-    window.location.href = `${post._id}`;
+    // navigate(`/gallery/${post._id}`);
+    location.href = `/gallery/${post._id}`;
   };
 
   console.log(post);
@@ -87,7 +89,7 @@ const SliderItem = ({ post }: any) => {
         )}
         <SliderItemImage
           onClick={handleNavigate}
-          src={post.thumbnail ? post.thumbnail : noImage}
+          src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
         ></SliderItemImage>
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>{post.description}</SliderItemDescription>

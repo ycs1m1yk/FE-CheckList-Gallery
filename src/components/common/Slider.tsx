@@ -12,7 +12,7 @@ import {
   faAngleLeft,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { IAllPostProps } from "../../types/interface";
+import { IAllPostProps } from "../../types/PostInterface";
 import Loader from "./Loader";
 
 const ButtonContainer = styled.div`
@@ -59,7 +59,7 @@ const NextButton = styled(Button)``;
 */
 
 const Carousel = () => {
-  const [userPost, setUserPost] = useState<IAllPostProps[]>([]);
+  const [posts, setPosts] = useState<IAllPostProps[]>([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [sliderPlay, setSliderPlay] = useState<boolean>(true);
@@ -73,11 +73,12 @@ const Carousel = () => {
     autoplaySpeed: 2000,
   };
 
-  // 유저의 작품 정보 얻어오기
-  const getUserPostFromApi = async () => {
+  // 작품 정보 얻어오기
+  const getPostsFromApi = async () => {
     try {
       const { data } = await axios.get("https://fcgserver.loca.lt/post");
-      setUserPost(data);
+      console.log(data);
+      setPosts(data);
     } catch (e: any) {
       setError(e);
     } finally {
@@ -86,14 +87,14 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    getUserPostFromApi();
+    getPostsFromApi();
   }, []);
 
   return isLoading ? (
     <Loader />
   ) : (
     <Slider ref={sliderRef} {...settings}>
-      {userPost.map((post) => (
+      {posts.map((post) => (
         <>
           <SliderItem key={post._id} post={post} />
           <ButtonContainer>
