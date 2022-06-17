@@ -80,7 +80,6 @@ const SliderItem = ({ post }: any) => {
     location.href = `/gallery/${post._id}`;
   };
 
-  console.log(post);
   return (
     <Container>
       <SliderItemContainer>

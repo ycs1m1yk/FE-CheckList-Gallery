@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import SliderItem from "./SliderItem";
 import Slider from "react-slick";
@@ -14,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IAllPostProps } from "../../types/PostInterface";
 import Loader from "./Loader";
+import { postApi } from "../../lib/api";
 
 const ButtonContainer = styled.div`
   text-align: center;
@@ -76,7 +76,7 @@ const Carousel = () => {
   // 작품 정보 얻어오기
   const getPostsFromApi = async () => {
     try {
-      const { data } = await axios.get("https://fcgserver.loca.lt/post");
+      const { data } = await postApi.getAllPosts();
       console.log(data);
       setPosts(data);
     } catch (e: any) {
