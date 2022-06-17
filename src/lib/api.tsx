@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 export const postApi = {
-  getAllPosts: () => api.get('/post'),
+  getAllPosts: (params?: Object) => api.get('/post', { params }),
   getPostById: (postId: string) => api.get(`/post/${postId}`),
   deletePost: (postId: string) => api.delete(`/post/${postId}`, {
     headers: {

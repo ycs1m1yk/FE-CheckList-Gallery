@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import SliderItem from './SliderItem';
+import { useLocation } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -11,8 +11,9 @@ import {
   faAngleLeft,
   faAngleRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { IAllPostProps } from '../../types/PostInterface';
+import { IAllPostProps } from '../../types/interface';
 import Loader from './Loader';
+import SliderItem from './SliderItem';
 import { postApi } from '../../lib/api';
 
 const ButtonContainer = styled.div`
@@ -64,6 +65,9 @@ function Carousel() {
   const [isLoading, setIsLoading] = useState(true);
   const [sliderPlay, setSliderPlay] = useState<boolean>(true);
   const sliderRef = useRef<Slider>(null);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const categoryId = query.get('tag');
 
   const settings = {
     infinite: true,
@@ -76,9 +80,16 @@ function Carousel() {
   // 작품 정보 얻어오기
   const getPostsFromApi = async () => {
     try {
-      const { data } = await postApi.getAllPosts();
-      console.log(data);
-      setPosts(data);
+      if (!categoryId) {
+        const { data } = await postApi.getAllPosts();
+        setPosts(data);
+      } else {
+        const params = {
+          categoryId,
+        };
+        const { data } = await postApi.getAllPosts(params);
+        setPosts(data);
+      }
     } catch (e: any) {
       setError(e);
     } finally {
@@ -93,10 +104,11 @@ function Carousel() {
   return isLoading ? (
     <Loader />
   ) : (
+    /* eslint-disable react/jsx-props-no-spreading */
     <Slider ref={sliderRef} {...settings}>
       {posts.map((post) => (
         <>
-          <SliderItem key={post._id} post={post} />
+          <SliderItem post={post} />
           <ButtonContainer>
             <PrevButton onClick={() => sliderRef?.current?.slickPrev()}>
               <FontAwesomeIcon icon={faAngleLeft} />
@@ -125,6 +137,7 @@ function Carousel() {
           </ButtonContainer>
         </>
       ))}
+      {error && <div>Error Occured</div>}
     </Slider>
   );
 }

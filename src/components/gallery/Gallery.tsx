@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Slider from '../common/Slider';
 import Loader from '../common/Loader';
 
