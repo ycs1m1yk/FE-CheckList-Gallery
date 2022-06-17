@@ -1,8 +1,8 @@
 import { DefaultTheme } from 'styled-components';
 
 const size = {
-  desktop: '767px',
-  mobile: '768px',
+  mobile: '767px',
+  desktop: '768px',
 };
 
 export const theme:DefaultTheme = {
@@ -14,7 +14,7 @@ export const theme:DefaultTheme = {
     extrawhite: '#EFF0EB',
   },
   devices: {
-    desktop: `(max-width: ${size.mobile})`,
-    mobile: `(min-width: ${size.desktop})`,
+    desktop: `(min-width: ${size.desktop})`,
+    mobile: `(max-width: ${size.mobile})`,
   },
 };
