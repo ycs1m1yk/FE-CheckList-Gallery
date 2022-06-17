@@ -12,7 +12,7 @@ import {
   faAngleLeft,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { IAllPostProps } from "../../types/PostInterface";
+import { IAllPostProps } from "../../types/interface";
 import Loader from "./Loader";
 import { postApi } from "../../lib/api";
 import axios from "axios";
