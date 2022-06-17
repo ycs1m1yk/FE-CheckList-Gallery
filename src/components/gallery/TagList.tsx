@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const StyledTagList = styled.div`
     position: absolute;
     width: 11.5rem;
+    left: -13.5rem;
+    margin-top: 2rem;
 
     & .title {
         font-size: 1rem;
@@ -19,8 +21,8 @@ const StyledTagList = styled.div`
     & ul :not(:first-child) {
       margin-top: 0.25rem;
     };
-    
-    @media ${(props) => props.theme.devices.desktop} {
+
+    @media (max-width: 1200px) {
       display: none;
     };
 `;

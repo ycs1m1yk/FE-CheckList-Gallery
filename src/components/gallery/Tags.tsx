@@ -7,13 +7,13 @@ const StyledTags = styled.div`
   overflow-x: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: -1.75rem;
 
   & :not(:first-child) {
     margin-left: 0.5rem;
   };
 
-  @media ${(props) => props.theme.devices.desktop} {
+  @media (max-width: 1200px) {
     display: flex;
   };
 `;
