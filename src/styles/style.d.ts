@@ -1,17 +1,17 @@
-import 'styled-components';
+import "styled-components";
 
-declare module 'styled-components'{
-    export interface DefaultTheme {
-        palette:{
-            triconblack: String,
-            africanviolet: String,
-            daydream: String,
-            lobelia: String,
-            extrawhite: String,
-        }
-        devices: {
-            desktop: String,
-            mobile: String
-        }
-    }
+declare module "styled-components" {
+  export interface DefaultTheme {
+    palette: {
+      triconblack: string;
+      africanviolet: string;
+      daydream: string;
+      lobelia: string;
+      extrawhite: string;
+    };
+    devices: {
+      desktop: string;
+      mobile: string;
+    };
+  }
 }
