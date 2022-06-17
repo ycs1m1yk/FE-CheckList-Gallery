@@ -1,21 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
-import { useLocation } from "react-router-dom";
-import SliderItem from "./SliderItem";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState, useRef } from 'react';
+import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlay,
   faPause,
   faAngleLeft,
   faAngleRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { IAllPostProps } from "../../types/interface";
-import Loader from "./Loader";
-import { postApi } from "../../lib/api";
-import axios from "axios";
+} from '@fortawesome/free-solid-svg-icons';
+import { IAllPostProps } from '../../types/interface';
+import Loader from './Loader';
+import SliderItem from './SliderItem';
+import { postApi } from '../../lib/api';
 
 const ButtonContainer = styled.div`
   text-align: center;
@@ -44,11 +43,11 @@ const Button = styled.button`
 const PrevButton = styled(Button)``;
 
 const PauseButton = styled(Button)<{ isPlay: boolean }>`
-  display: ${(props) => (props.isPlay ? "inline-block" : "none")};
+  display: ${(props) => (props.isPlay ? 'inline-block' : 'none')};
 `;
 
 const PlayButton = styled(Button)<{ isPlay: boolean }>`
-  display: ${(props) => (props.isPlay ? "none" : "inline-block")};
+  display: ${(props) => (props.isPlay ? 'none' : 'inline-block')};
 `;
 
 const NextButton = styled(Button)``;
@@ -67,8 +66,8 @@ function Carousel() {
   const [sliderPlay, setSliderPlay] = useState<boolean>(true);
   const sliderRef = useRef<Slider>(null);
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const categoryId = params.get("tag");
+  const query = new URLSearchParams(location.search);
+  const categoryId = query.get('tag');
 
   const settings = {
     infinite: true,
@@ -80,18 +79,15 @@ function Carousel() {
 
   // 작품 정보 얻어오기
   const getPostsFromApi = async () => {
-    console.log(categoryId);
     try {
       if (!categoryId) {
         const { data } = await postApi.getAllPosts();
-        console.log(data);
         setPosts(data);
       } else {
         const params = {
           categoryId,
         };
         const { data } = await postApi.getAllPosts(params);
-        console.log(data);
         setPosts(data);
       }
     } catch (e: any) {
@@ -108,10 +104,11 @@ function Carousel() {
   return isLoading ? (
     <Loader />
   ) : (
+    /* eslint-disable react/jsx-props-no-spreading */
     <Slider ref={sliderRef} {...settings}>
       {posts.map((post) => (
         <>
-          <SliderItem key={post._id} post={post} />
+          <SliderItem post={post} />
           <ButtonContainer>
             <PrevButton onClick={() => sliderRef?.current?.slickPrev()}>
               <FontAwesomeIcon icon={faAngleLeft} />
@@ -140,6 +137,7 @@ function Carousel() {
           </ButtonContainer>
         </>
       ))}
+      {error && <div>Error Occured</div>}
     </Slider>
   );
 }

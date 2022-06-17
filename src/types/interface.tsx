@@ -1,13 +1,15 @@
-export interface IAllPostProps {
+export interface ICategoryProps {
   _id: string;
-  title: string;
-  description: string;
-  categories: ICategoryListProps[];
-  code: ICodeProps[];
-  author: IAuthorProps;
-  createdAt: Date;
-  updatedAt: Date;
+  name: string;
+  lowerName: string;
+  post: number;
   __v: number;
+}
+
+export interface ICodeProps {
+  fileName: string;
+  fileUrl: string;
+  _id: string;
 }
 
 export interface IAuthorProps {
@@ -28,16 +30,14 @@ export interface ICategoryListProps {
   _id: string;
 }
 
-export interface ICategoryProps {
+export interface IAllPostProps {
   _id: string;
-  name: string;
-  lowerName: string;
-  post: number;
+  title: string;
+  description: string;
+  categories: ICategoryListProps[];
+  code: ICodeProps[];
+  author: IAuthorProps;
+  createdAt: Date;
+  updatedAt: Date;
   __v: number;
-}
-
-export interface ICodeProps {
-  fileName: string;
-  fileUrl: string;
-  _id: string;
 }

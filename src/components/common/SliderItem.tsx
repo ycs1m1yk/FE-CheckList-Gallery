@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { ICategoryListProps, IAllPostProps } from "../../types/interface";
-import noImage from "../../images/noImage.jpeg";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { ICategoryListProps } from '../../types/interface';
+import noImage from '../../images/noImage.jpeg';
 
 const Container = styled.div`
   display: flex;
@@ -90,7 +90,7 @@ function SliderItem({ post }: any) {
   };
 
   return (
-    <Container>
+    <Container key={post._id}>
       <SliderItemContainer>
         <ItemHeaderContainer>
           {post.createdAt && (
@@ -98,8 +98,10 @@ function SliderItem({ post }: any) {
           )}
           {post.author && (
             <SliderItemAuthor>
-              Made By {/* 작가 페이지로 이동하는 경우  */}
-              <Link style={{ textDecoration: "none" }} to={"#"}>
+              Made By
+              {' '}
+              {/* 작가 페이지로 이동하는 경우  */}
+              <Link style={{ textDecoration: 'none' }} to="#">
                 {post.author.username}
               </Link>
             </SliderItemAuthor>

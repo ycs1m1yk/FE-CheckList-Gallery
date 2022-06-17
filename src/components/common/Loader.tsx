@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 
-function Loader({ color = 'black' }) {
+function Loader() {
   return (
     <div className="contentWrap">
       {' '}
@@ -15,12 +15,7 @@ function Loader({ color = 'black' }) {
       >
         <h2>Waiting</h2>
         {' '}
-        <ReactLoading
-          type="cylon"
-          color={color}
-          height="80%"
-          width="80%"
-        />
+        <ReactLoading type="cylon" color="black" height="80%" width="80%" />
         {' '}
       </div>
       {' '}
