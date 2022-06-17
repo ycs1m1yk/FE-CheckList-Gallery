@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -39,34 +39,34 @@ const Tag = styled(Link)`
   }
  `;
 
-function Tags() {
-  const [selectedTag, setSelectedTag] = useState('전체보기');
-  const [tags, setTags] = useState([
-    { name: '전체보기', count: 8, isSelected: true },
-    { name: '태그1', count: 3, isSelected: false },
-    { name: '태그2', count: 5, isSelected: false },
-    { name: '태그3', count: 1, isSelected: false },
-    { name: '태그4', count: 6, isSelected: false },
-    { name: '태그5', count: 2, isSelected: false },
-  ]);
+function Tags({ postCount, tags }) {
+  const [selectedId, setSelectedId] = useState('');
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
     const target = e.target.closest('a');
-    document.querySelector('.selected')?.classList.remove('selected');
-    target.classList.add('selected');
-    setSelectedTag(target.key);
+    setSelectedId(target.id);
   };
 
+  // TODO
+  // - [ ] 전체보기 카테고리 생기면 수정
   return (
     <StyledTags className="Tags" onClick={handleClick}>
-      {tags.map(({ name, count }) => (
-        <Tag key={name} to="#;" className={`Tag ${name === selectedTag ? 'selected' : null}`}>
+      <Tag key="allCategories" to="/gallery" id="allCategories" className="Tag selected">
+        전체보기
+        <span>
+          (
+          {postCount}
+          )
+        </span>
+      </Tag>
+      {tags.map(({ _id, name, post }) => (
+        <Tag key={_id} id={_id} to={`/gallery?tag=${_id}`} className={`Tag ${_id === selectedId ? 'selected' : null}`}>
           {name}
           <span>
             (
-            {count}
+            {post}
             )
           </span>
         </Tag>
