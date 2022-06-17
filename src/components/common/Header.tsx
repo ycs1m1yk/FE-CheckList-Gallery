@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { theme } from "../../styles/theme";
 
 const Container = styled.div`
   width: 100%;
@@ -88,14 +88,14 @@ export default function Header() {
   return (
     <Container>
       <Info>
-        <a className='logo' href='/'>
+        <a className="logo" href="/">
           🎨 CHECKLIST GALLERY
         </a>
-        <div className='login-info'>
-          <a href='/'>로그인</a>
-          <a href='/'>전시 소개</a>
+        <div className="login-info">
+          <a href="/">로그인</a>
+          <a href="/">전시 소개</a>
         </div>
-        <ul className='hamburger-bar'>
+        <ul className="hamburger-bar">
           햄버거
           <li>김주현</li>
           <li>박민수</li>
@@ -107,12 +107,12 @@ export default function Header() {
       </Info>
       <Members>
         <div></div>
-        <a href='/'>김주현</a>
-        <a href='/'>박민수</a>
-        <a href='/'>설재혁</a>
-        <a href='/'>이혜성</a>
-        <a href='/'>장덕준</a>
-        <a href='/'>김소리</a>
+        <a href="/">김주현</a>
+        <a href="/">박민수</a>
+        <a href="/">설재혁</a>
+        <a href="/">이혜성</a>
+        <a href="/">장덕준</a>
+        <a href="/">김소리</a>
       </Members>
     </Container>
   );
