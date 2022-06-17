@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ICategoryProps } from '../../types/PostInterface';
+import { ICategoryProps } from '../../types/interface';
 import { postApi, categoryApi } from '../../lib/api';
 import TagList from './TagList';
 import Tags from './Tags';
