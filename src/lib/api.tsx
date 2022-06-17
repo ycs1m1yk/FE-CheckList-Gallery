@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 const token = 'test';
+const baseURL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
-  baseURL: 'https://fcgserver.loca.lt/',
+  baseURL,
 });
 
 export const postApi = {
