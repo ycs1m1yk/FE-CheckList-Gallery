@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import { ICategoryListProps } from "../../types/PostInterface";
-import noImage from "../../images/noImage.jpeg";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { ICategoryListProps } from '../../types/interface';
+import noImage from '../../images/noImage.jpeg';
 
 const Container = styled.div`
   display: flex;
@@ -19,26 +19,36 @@ const SliderItemContainer = styled.div`
 
   @media screen and (max-width: 767px) {
     width: 30rem;
-    height: 25rem;
+    height: 28rem;
   }
+`;
+
+const ItemHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.3rem;
 `;
 
 const SliderItemCreated = styled.span`
   font-size: 1.3rem;
-  position: relative;
-  top: 5%;
-  left: 5%;
+  margin-left: 1rem;
+`;
+
+const SliderItemAuthor = styled.span`
+  font-size: 1.3rem;
+  margin-right: 1rem;
 `;
 
 const SliderItemImage = styled.img`
   cursor: pointer;
+  box-sizing: border-box;
   width: 30rem;
-  height: 15rem;
-  padding: 4rem;
-  margin: 0 auto;
+  height: 20rem;
+  padding: 2rem;
+  margin: 1rem auto;
   @media screen and (max-width: 767px) {
-    width: 15rem;
-    height: 10rem;
+    width: 20rem;
+    height: 15rem;
   }
 `;
 
@@ -50,7 +60,7 @@ const SliderItemTitle = styled.div`
 const SliderItemDescription = styled.div`
   font-size: 1.2rem;
   text-align: center;
-  margin-top: 1rem;
+  margin: 1rem;
 `;
 
 const SliderItemTagContainer = styled.div`
@@ -61,6 +71,7 @@ const SliderItemTagContainer = styled.div`
   }
   @media screen and (max-width: 767px) {
     text-align: center;
+    margin-top: 2rem;
   }
 `;
 
@@ -73,33 +84,43 @@ const SliderItemTag = styled(Link)`
   text-decoration: none;
 `;
 
-const SliderItem = ({ post }: any) => {
-  const navigate = useNavigate();
+function SliderItem({ post }: any) {
   const handleNavigate = () => {
-    // navigate(`/gallery/${post._id}`);
     location.href = `/gallery/${post._id}`;
   };
 
   return (
-    <Container>
+    <Container key={post._id}>
       <SliderItemContainer>
-        {post.createdAt && (
-          <SliderItemCreated>{post.createdAt.slice(0, 10)}</SliderItemCreated>
-        )}
+        <ItemHeaderContainer>
+          {post.createdAt && (
+            <SliderItemCreated>{post.createdAt.slice(0, 10)}</SliderItemCreated>
+          )}
+          {post.author && (
+            <SliderItemAuthor>
+              Made By
+              {' '}
+              {/* 작가 페이지로 이동하는 경우  */}
+              <Link style={{ textDecoration: 'none' }} to="#">
+                {post.author.username}
+              </Link>
+            </SliderItemAuthor>
+          )}
+        </ItemHeaderContainer>
         <SliderItemImage
           onClick={handleNavigate}
           src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
-        ></SliderItemImage>
+        />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
-            <SliderItemTag to={"#"}>{category.name}</SliderItemTag>
+            <SliderItemTag to="#">{category.name}</SliderItemTag>
           ))}
         </SliderItemTagContainer>
       </SliderItemContainer>
     </Container>
   );
-};
+}
 
 export default SliderItem;

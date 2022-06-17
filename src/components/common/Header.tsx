@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { theme } from "../../styles/theme";
+import React from 'react';
+import styled from 'styled-components';
+import { theme } from '../../styles/theme';
 
 const Container = styled.div`
   width: 100%;
@@ -106,7 +106,7 @@ export default function Header() {
         </ul>
       </Info>
       <Members>
-        <div></div>
+        <div />
         <a href="/">김주현</a>
         <a href="/">박민수</a>
         <a href="/">설재혁</a>
