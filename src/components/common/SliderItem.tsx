@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import { ICategoryListProps } from "../../types/PostInterface";
-import noImage from "../../images/noImage.jpeg";
+import React from 'react';
+import styled from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
+import { ICategoryListProps } from '../../types/PostInterface';
+import noImage from '../../images/noImage.jpeg';
 
 const Container = styled.div`
   display: flex;
@@ -73,7 +73,7 @@ const SliderItemTag = styled(Link)`
   text-decoration: none;
 `;
 
-const SliderItem = ({ post }: any) => {
+function SliderItem({ post }: any) {
   const navigate = useNavigate();
   const handleNavigate = () => {
     // navigate(`/gallery/${post._id}`);
@@ -89,17 +89,17 @@ const SliderItem = ({ post }: any) => {
         <SliderItemImage
           onClick={handleNavigate}
           src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
-        ></SliderItemImage>
+        />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
-            <SliderItemTag to={"#"}>{category.name}</SliderItemTag>
+            <SliderItemTag to="#">{category.name}</SliderItemTag>
           ))}
         </SliderItemTagContainer>
       </SliderItemContainer>
     </Container>
   );
-};
+}
 
 export default SliderItem;
