@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
-import SliderItem from "./SliderItem";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState, useRef } from 'react';
+import styled from 'styled-components';
+import SliderItem from './SliderItem';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlay,
   faPause,
   faAngleLeft,
   faAngleRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { IAllPostProps } from "../../types/PostInterface";
-import Loader from "./Loader";
-import { postApi } from "../../lib/api";
+} from '@fortawesome/free-solid-svg-icons';
+import { IAllPostProps } from '../../types/PostInterface';
+import Loader from './Loader';
+import { postApi } from '../../lib/api';
 
 const ButtonContainer = styled.div`
   text-align: center;
@@ -42,11 +42,11 @@ const Button = styled.button`
 const PrevButton = styled(Button)``;
 
 const PauseButton = styled(Button)<{ isPlay: boolean }>`
-  display: ${(props) => (props.isPlay ? "inline-block" : "none")};
+  display: ${(props) => (props.isPlay ? 'inline-block' : 'none')};
 `;
 
 const PlayButton = styled(Button)<{ isPlay: boolean }>`
-  display: ${(props) => (props.isPlay ? "none" : "inline-block")};
+  display: ${(props) => (props.isPlay ? 'none' : 'inline-block')};
 `;
 
 const NextButton = styled(Button)``;
@@ -58,7 +58,7 @@ const NextButton = styled(Button)``;
     -> state, Interface, API Request를 확장성 있게 만들어야 함
 */
 
-const Carousel = () => {
+function Carousel() {
   const [posts, setPosts] = useState<IAllPostProps[]>([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -127,6 +127,6 @@ const Carousel = () => {
       ))}
     </Slider>
   );
-};
+}
 
 export default Carousel;

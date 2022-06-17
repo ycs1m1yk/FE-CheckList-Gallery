@@ -1,15 +1,16 @@
-import { useState } from "react";
-import Slider from "../common/Slider";
-import Loader from "../common/Loader";
-const Gallery = () => {
+import { useState } from 'react';
+import Slider from '../common/Slider';
+import Loader from '../common/Loader';
+
+function Gallery() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleLoad = () => {
-    console.log("Content Load Finish");
+    console.log('Content Load Finish');
     setIsLoading(false);
   };
 
-  window.addEventListener("load", handleLoad);
+  window.addEventListener('load', handleLoad);
 
   return isLoading ? (
     <Loader />
@@ -21,6 +22,6 @@ const Gallery = () => {
       {/* <Footer /> */}
     </>
   );
-};
+}
 
 export default Gallery;
