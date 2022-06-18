@@ -9,7 +9,7 @@ const GalleryContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  @media ${(props) => props.theme.devices.desktop} {
+  @media ${(props) => props.theme.devices.mobile} {
     width: 100%;
   };
 `;
