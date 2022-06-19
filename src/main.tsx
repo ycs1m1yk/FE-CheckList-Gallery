@@ -9,8 +9,8 @@ import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
-    <GlobalStyle />
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <App />
     </ThemeProvider>
   </>,
