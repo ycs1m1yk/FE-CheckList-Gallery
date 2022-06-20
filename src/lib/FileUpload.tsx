@@ -11,7 +11,7 @@ import { FileProps } from '../types/interface';
 interface FileUploadProps{
   name:string,
   multiple:boolean,
-  fileState:  FileProps[],
+  fileState: FileProps[],
   setFileState: React.Dispatch<React.SetStateAction< FileProps[]>>
 }
 const Container = styled.div`
@@ -106,10 +106,10 @@ export default function FileUpload({
     // 드래그 앤 드롭 했을때
       selectFiles = e.dataTransfer.files;
     } else {
-    // "파일 첨부" 버튼을 눌러서 이미지를 선택했을때
+    // "파일 첨부" 버튼을 눌러서 이미지를 선택했을 때
       selectFiles = e.target.files;
     }
-    console.log(selectFiles)
+    console.log(selectFiles);
     if (selectFiles.length) {
       if (multiple) {
         Object.keys(selectFiles).forEach((key, index) => {
@@ -146,6 +146,7 @@ export default function FileUpload({
     setIsDragging(false);
     onUploadFile(e); // 드롭 시 업로드
   };
+  // 삭제 버튼 클릭 시 삭제
   const deletefileHandler = (e: MouseEventHandler<SVGSVGElement>, id:number) => {
     e.preventDefault();
     e.stopPropagation();
