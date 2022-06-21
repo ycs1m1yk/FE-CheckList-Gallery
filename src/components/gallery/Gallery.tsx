@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Slider from '../common/Slider';
-import Loader from '../common/Loader';
-import SideBar from './SideBar';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Slider from "../common/Slider";
+import Loader from "../common/Loader";
+import SideBar from "./SideBar";
 
 const GalleryContainer = styled.div`
   width: 768px;
@@ -11,7 +11,7 @@ const GalleryContainer = styled.div`
 
   @media ${(props) => props.theme.devices.mobile} {
     width: 100%;
-  };
+  } ;
 `;
 
 function Gallery() {
