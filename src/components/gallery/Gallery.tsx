@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from '../common/Slider';
 import Loader from '../common/Loader';
@@ -17,12 +17,9 @@ const GalleryContainer = styled.div`
 function Gallery() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleLoad = () => {
-    console.log('Content Load Finish');
+  useEffect(() => {
     setIsLoading(false);
-  };
-
-  window.addEventListener('load', handleLoad);
+  }, []);
 
   return isLoading ? (
     <Loader />
