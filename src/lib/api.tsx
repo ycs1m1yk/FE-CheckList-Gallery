@@ -7,6 +7,10 @@ const api = axios.create({
   baseURL,
 });
 
+export const authApi = {
+  getAuthToken: (code:string) => api.get(`/auth/${code}`),
+};
+
 export const postApi = {
   getAllPosts: (params?: Object) => api.get('/post', { params }),
   getPostById: (postId: string) => api.get(`/post/${postId}`),
