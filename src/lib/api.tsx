@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const token = 'test';
+const token = window.localStorage.getItem('token');
 const baseURL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
