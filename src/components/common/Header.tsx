@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // import { theme } from '../../styles/theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 // import getUser from './UserList';
 import GetUser from './UserList';
+import GitHubOauth from './../auth/GitHubOauth';
 
 const LOGIN_URL = 'http://ec2-3-128-87-34.us-east-2.compute.amazonaws.com/auth/github';
 const Container = styled.div`
@@ -34,22 +35,20 @@ const Info = styled.div`
     text-decoration: none;
     margin: 10px;
   }
-
+  & button {
+    background-color: none;
+    border: none;
+  }
   & .hamburger-bar {
     color: ${(props) => props.theme.palette.extrawhite};
     margin: 20px;
   }
 
-  /* & li {
+  /* & .hamburger-member {
     display: none;
   } */
-
-  & .hamburger-bar:hover {
-    display: box;
-  }
-
   @media ${(props) => props.theme.devices.desktop} {
-    .hamburger-bar {
+    & .hamburger-bar {
       display: none;
     }
   }
@@ -58,11 +57,40 @@ const Info = styled.div`
     .login-info {
       display: none;
     }
-    .hamburger-bar {
+
+    & .hamburger-bar {
       display: box;
     }
-    .hamburger-bar li {
+    & .hamburger-member {
       display: none;
+    }
+
+    & .hamburger-bar & .hamburger-member {
+      :hover {
+        display: flex;
+        background-color: ${(props) => props.theme.palette.lobelia};
+        flex-direction: column;
+        height: 90px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: absolute;
+        left: 0;
+        & li {
+          color: ${(props) => props.theme.palette.extrawhite};
+          display: flex;
+          /* flex-direction: center; */
+          justify-content: center;
+          align-items: center;
+        }
+        & img {
+          border-radius: 100%;
+          width: 38px;
+          border: 3px solid ${(props) => props.theme.palette.extrawhite};
+          margin: 10px;
+        }
+      }
     }
   }
 `;
@@ -83,10 +111,15 @@ const Members = styled.div`
     color: ${(props) => props.theme.palette.extrawhite};
   }
 
-  & li {
+  & ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  & li a {
     color: ${(props) => props.theme.palette.extrawhite};
     display: flex;
-    /* flex-direction: center; */
     justify-content: center;
     align-items: center;
   }
@@ -103,8 +136,6 @@ const Members = styled.div`
 `;
 
 export default function Header() {
-  // const { user, setUser } = useState(getUser);
-  // console.log(user);
   return (
     <Container>
       <Info>
@@ -112,16 +143,26 @@ export default function Header() {
           🎨 CHECKLIST GALLERY
         </a>
         <div className='login-info'>
-          <a href={LOGIN_URL}>로그인</a>
+          <GitHubOauth />
           <a href='/'>전시 소개</a>
         </div>
         <ul className='hamburger-bar'>
           <FontAwesomeIcon icon={faBars} />
+          <div className='hamburger-member'>
+            <GitHubOauth />
+            <a href='/'>전시 소개</a>
+            <GetUser />
+          </div>
         </ul>
       </Info>
       <Members>
         <div></div>
-        <GetUser />
+        <ul>
+          <li>
+            <a href='/gallery'>전체보기</a>
+          </li>
+          <GetUser />
+        </ul>
       </Members>
     </Container>
   );
