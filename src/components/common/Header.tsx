@@ -35,20 +35,20 @@ const Info = styled.div`
     text-decoration: none;
     margin: 10px;
   }
-  & button {
+  button {
     background-color: none;
     border: none;
   }
-  & .hamburger-bar {
+  .hamburger-bar {
     color: ${(props) => props.theme.palette.extrawhite};
     margin: 20px;
   }
 
-  /* & .hamburger-member {
+  /* .hamburger-bar {
     display: none;
   } */
   @media ${(props) => props.theme.devices.desktop} {
-    & .hamburger-bar {
+    .hamburger-bar {
       display: none;
     }
   }
@@ -58,37 +58,43 @@ const Info = styled.div`
       display: none;
     }
 
-    & .hamburger-bar {
+    .hamburger-bar {
       display: box;
+      cursor: pointer;
     }
-    & .hamburger-member {
+    .hamburger-member {
       display: none;
     }
 
-    & .hamburger-bar & .hamburger-member {
-      :hover {
+    .hamburger-bar:hover {
+      .hamburger-member {
         display: flex;
         background-color: ${(props) => props.theme.palette.lobelia};
         flex-direction: column;
-        height: 90px;
-        width: 100%;
         display: flex;
-        align-items: center;
-        justify-content: space-around;
+        align-items: flex-start;
         position: absolute;
-        left: 0;
+        right: 0;
+        z-index: 100;
+        border-radius: 30px;
+        padding: 0.2rem;
         & li {
           color: ${(props) => props.theme.palette.extrawhite};
           display: flex;
-          /* flex-direction: center; */
+          flex-direction: flex-start;
           justify-content: center;
           align-items: center;
+          & a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
         & img {
           border-radius: 100%;
           width: 38px;
           border: 3px solid ${(props) => props.theme.palette.extrawhite};
-          margin: 10px;
+          margin-right: 10px;
         }
       }
     }
@@ -144,13 +150,11 @@ export default function Header() {
         </a>
         <div className='login-info'>
           <GitHubOauth />
-          <a href='/'>전시 소개</a>
         </div>
-        <ul className='hamburger-bar'>
+        <ul href='#' className='hamburger-bar'>
           <FontAwesomeIcon icon={faBars} />
           <div className='hamburger-member'>
             <GitHubOauth />
-            <a href='/'>전시 소개</a>
             <GetUser />
           </div>
         </ul>
