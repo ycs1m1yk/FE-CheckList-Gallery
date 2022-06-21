@@ -7,6 +7,7 @@ import Home from './components/home/Home';
 import Gallery from './components/gallery/Gallery';
 import Detail from './components/gallery/Detail';
 import Publish from './components/publish/Publish';
+import AuthCallback from './components/auth/AuthCallback';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/gallery/:postId" element={<Detail />} />
         <Route path="/publish" element={<Publish />} />

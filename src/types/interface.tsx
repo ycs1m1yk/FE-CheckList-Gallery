@@ -41,3 +41,7 @@ export interface IAllPostProps {
   updatedAt: Date;
   __v: number;
 }
+export interface FileProps{
+    id: number;
+    file: File | null;
+}
