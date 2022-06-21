@@ -8,12 +8,12 @@ const api = axios.create({
 });
 
 export const authApi = {
-  getAuthToken: (code:string) => api.get(`/auth/${code}`),
+  getAuthToken: (code: string) => api.get(`/auth/${code}`),
 };
 
 export const postApi = {
   getAllPosts: (params?: Object) => api.get('/post', { params }),
-  getPostById: (postId: string) => api.get(`/post/${postId}`),
+  getPostById: (postId: string | undefined) => api.get(`/post/${postId}`),
   deletePost: (postId: string) => api.delete(`/post/${postId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
