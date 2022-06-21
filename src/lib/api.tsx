@@ -1,13 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
-const token = "test";
+const token = 'test';
+const baseURL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
-  baseURL: "https://fcgserver.loca.lt/",
+  baseURL,
 });
 
 export const postApi = {
-  getAllPosts: () => api.get("/post"),
+  getAllPosts: (params?: Object) => api.get('/post', { params }),
   getPostById: (postId: string) => api.get(`/post/${postId}`),
   deletePost: (postId: string) =>
     api.delete(`/post/${postId}`, {
@@ -22,7 +23,7 @@ export const postApi = {
       },
     }),
   publishPost: (bodyData: FormData) =>
-    api.post("/post", bodyData, {
+    api.post('/post', bodyData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -30,11 +31,11 @@ export const postApi = {
 };
 
 export const categoryApi = {
-  getAllCategory: () => api.get("/category"),
+  getAllCategory: () => api.get('/category'),
 };
 
 export const userApi = {
-  getAllUser: () => api.get("/user"),
+  getAllUser: () => api.get('/user'),
   getUserById: (userId: string) => api.get(`/user/${userId}`),
   updateUser: (userId: string, bodyData: Object) =>
     api.patch(`/user/${userId}`, bodyData, {

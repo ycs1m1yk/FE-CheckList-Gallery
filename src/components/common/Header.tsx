@@ -1,7 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { theme } from "../../styles/theme";
+import React from 'react';
+import styled from 'styled-components';
+// import { theme } from '../../styles/theme';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+// import getUser from './UserList';
+import GetUser from './UserList';
 
+const LOGIN_URL = 'http://ec2-3-128-87-34.us-east-2.compute.amazonaws.com/auth/github';
 const Container = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.palette.triconblack};
@@ -31,10 +36,8 @@ const Info = styled.div`
   }
 
   & .hamburger-bar {
-    /* display:none; */
     color: ${(props) => props.theme.palette.extrawhite};
     margin: 20px;
-    /* display: none; */
   }
 
   /* & li {
@@ -45,13 +48,13 @@ const Info = styled.div`
     display: box;
   }
 
-  @media ${(props) => props.theme.devices.mobile} {
+  @media ${(props) => props.theme.devices.desktop} {
     .hamburger-bar {
       display: none;
     }
   }
 
-  @media ${(props) => props.theme.devices.desktop} {
+  @media ${(props) => props.theme.devices.mobile} {
     .login-info {
       display: none;
     }
@@ -79,40 +82,46 @@ const Members = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.palette.extrawhite};
   }
-  @media ${(props) => props.theme.devices.desktop} {
+
+  & li {
+    color: ${(props) => props.theme.palette.extrawhite};
+    display: flex;
+    /* flex-direction: center; */
+    justify-content: center;
+    align-items: center;
+  }
+
+  & img {
+    border-radius: 100%;
+    width: 38px;
+    border: 3px solid ${(props) => props.theme.palette.extrawhite};
+    margin: 10px;
+  }
+  @media ${(props) => props.theme.devices.mobile} {
     display: none;
   }
 `;
 
 export default function Header() {
+  // const { user, setUser } = useState(getUser);
+  // console.log(user);
   return (
     <Container>
       <Info>
-        <a className="logo" href="/">
+        <a className='logo' href='/'>
           🎨 CHECKLIST GALLERY
         </a>
-        <div className="login-info">
-          <a href="/">로그인</a>
-          <a href="/">전시 소개</a>
+        <div className='login-info'>
+          <a href={LOGIN_URL}>로그인</a>
+          <a href='/'>전시 소개</a>
         </div>
-        <ul className="hamburger-bar">
-          햄버거
-          <li>김주현</li>
-          <li>박민수</li>
-          <li>설재혁</li>
-          <li>이혜성</li>
-          <li>장덕준</li>
-          <li>김소리</li>
+        <ul className='hamburger-bar'>
+          <FontAwesomeIcon icon={faBars} />
         </ul>
       </Info>
       <Members>
         <div></div>
-        <a href="/">김주현</a>
-        <a href="/">박민수</a>
-        <a href="/">설재혁</a>
-        <a href="/">이혜성</a>
-        <a href="/">장덕준</a>
-        <a href="/">김소리</a>
+        <GetUser />
       </Members>
     </Container>
   );
