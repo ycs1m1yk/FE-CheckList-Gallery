@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const token = 'test';
+const token = window.localStorage.getItem('token');
 const baseURL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL,
 });
+
+export const authApi = {
+  getAuthToken: (code:string) => api.get(`/auth/${code}`),
+};
 
 export const postApi = {
   getAllPosts: (params?: Object) => api.get('/post', { params }),
