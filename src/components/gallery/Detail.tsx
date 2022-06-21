@@ -53,10 +53,10 @@ function Title({ title }: any) {
   );
 }
 
-function Tags({ category }: any) {
+function Tags({ categories }: any) {
   return (
     <TagBox>
-      {category.map((ct: any) => (
+      {categories.map((ct: any) => (
         <TagLink key={ct._id} to={`/gallery?tag=${ct.category._id}`}>
           {ct.category.name}
         </TagLink>
@@ -74,7 +74,7 @@ function Body({ description }: any) {
 }
 
 export default function Detail() {
-  const [post, setPost] = useState<IAllPostProps>();
+  const [post, setPost] = useState<IAllPostProps | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { postId } = useParams();
@@ -93,14 +93,13 @@ export default function Detail() {
   useEffect(() => {
     getPostFromApi();
   }, []);
-  console.log(post);
 
   return isLoading ? (
     <Loader />
   ) : (
     <DetailContainer>
       <Title title={post?.title} />
-      <Tags category={post?.categories} />
+      <Tags categories={post?.categories} />
       <Body description={post?.description} />
     </DetailContainer>
   );
