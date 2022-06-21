@@ -7,7 +7,6 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import GetUser from './UserList';
 import GitHubOauth from './../auth/GitHubOauth';
 
-const LOGIN_URL = 'http://ec2-3-128-87-34.us-east-2.compute.amazonaws.com/auth/github';
 const Container = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.palette.triconblack};
