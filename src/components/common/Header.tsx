@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
+import GitHubOauth from '../auth/GitHubOauth';
 
 const Container = styled.div`
   width: 100%;
@@ -92,8 +93,7 @@ export default function Header() {
           🎨 CHECKLIST GALLERY
         </a>
         <div className="login-info">
-          <a href="/">로그인</a>
-          <a href="/">전시 소개</a>
+          <GitHubOauth>로그인</GitHubOauth>
         </div>
         <ul className="hamburger-bar">
           햄버거
