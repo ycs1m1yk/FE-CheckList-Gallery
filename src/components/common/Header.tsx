@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-// import { theme } from '../../styles/theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-// import getUser from './UserList';
 import GetUser from './UserList';
-import GitHubOauth from './../auth/GitHubOauth';
+import GitHubOauth from '../auth/GitHubOauth';
+import PublishBtn from './PublishBtn';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { LoginContext } from '../../App';
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +35,7 @@ const Info = styled.div`
     text-decoration: none;
     margin: 10px;
   }
-  button {
+  & button {
     background-color: none;
     border: none;
   }
@@ -42,10 +43,10 @@ const Info = styled.div`
     color: ${(props) => props.theme.palette.extrawhite};
     margin: 20px;
   }
+  .login-info {
+    display: flex;
+  }
 
-  /* .hamburger-bar {
-    display: none;
-  } */
   @media ${(props) => props.theme.devices.desktop} {
     .hamburger-bar {
       display: none;
@@ -140,7 +141,10 @@ const Members = styled.div`
   }
 `;
 
-export default function Header() {
+export default function Header({ isLogin }) {
+  const { token, setToken } = useContext(LoginContext);
+  console.log(isLogin);
+
   return (
     <Container>
       <Info>
@@ -148,18 +152,20 @@ export default function Header() {
           🎨 CHECKLIST GALLERY
         </a>
         <div className='login-info'>
+          {token && <PublishBtn />}
           <GitHubOauth />
         </div>
         <ul href='#' className='hamburger-bar'>
           <FontAwesomeIcon icon={faBars} />
           <div className='hamburger-member'>
             <GitHubOauth />
+            {token && <PublishBtn />}
             <GetUser />
           </div>
         </ul>
       </Info>
       <Members>
-        <div></div>
+        <div />
         <ul>
           <li>
             <a href='/gallery'>전체보기</a>

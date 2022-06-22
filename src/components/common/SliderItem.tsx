@@ -96,8 +96,10 @@ function SliderItem({ post }: any) {
           {post.createdAt && <SliderItemCreated>{post.createdAt.slice(0, 10)}</SliderItemCreated>}
           {post.author && (
             <SliderItemAuthor>
-              Made By {/* 작가 페이지로 이동하는 경우  */}
-              <Link style={{ textDecoration: 'none' }} to='#'>
+              Made By
+              {' '}
+              {/* 작가 페이지로 이동하는 경우  */}
+              <Link style={{ textDecoration: 'none' }} to="#">
                 {post.author.username}
               </Link>
             </SliderItemAuthor>
@@ -108,7 +110,7 @@ function SliderItem({ post }: any) {
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
-            <SliderItemTag to='#'>{category.name}</SliderItemTag>
+            <SliderItemTag to="#">{category.name}</SliderItemTag>
           ))}
         </SliderItemTagContainer>
       </SliderItemContainer>
