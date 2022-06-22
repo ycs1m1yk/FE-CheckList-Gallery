@@ -5,7 +5,7 @@ const size = {
   desktop: '768px',
 };
 
-export const theme:DefaultTheme = {
+export const theme: DefaultTheme = {
   palette: {
     triconblack: '#2D2D2D',
     africanviolet: '#6C4F85',

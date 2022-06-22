@@ -93,9 +93,7 @@ function SliderItem({ post }: any) {
     <Container key={post._id}>
       <SliderItemContainer>
         <ItemHeaderContainer>
-          {post.createdAt && (
-            <SliderItemCreated>{post.createdAt.slice(0, 10)}</SliderItemCreated>
-          )}
+          {post.createdAt && <SliderItemCreated>{post.createdAt.slice(0, 10)}</SliderItemCreated>}
           {post.author && (
             <SliderItemAuthor>
               Made By
@@ -107,10 +105,7 @@ function SliderItem({ post }: any) {
             </SliderItemAuthor>
           )}
         </ItemHeaderContainer>
-        <SliderItemImage
-          onClick={handleNavigate}
-          src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
-        />
+        <SliderItemImage onClick={handleNavigate} src={post.thumbnail ? post.thumbnail.fileUrl : noImage} />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>

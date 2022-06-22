@@ -1,6 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import GetUser from './UserList';
 import GitHubOauth from '../auth/GitHubOauth';
 
 const Container = styled.div`
@@ -30,37 +32,75 @@ const Info = styled.div`
     text-decoration: none;
     margin: 10px;
   }
-
-  & .hamburger-bar {
-    /* display:none; */
+  & button {
+    background-color: none;
+    border: none;
+  }
+  .hamburger-bar {
     color: ${(props) => props.theme.palette.extrawhite};
     margin: 20px;
-    /* display: none; */
+  }
+  .login-info {
+    display: flex;
   }
 
-  /* & li {
-    display: none;
-  } */
-
-  & .hamburger-bar:hover {
-    display: box;
-  }
-
-  @media ${(props) => props.theme.devices.mobile} {
-    .hamburger-bar {
-      display: none;
-    }
+  button {
+    height: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #727272;
   }
 
   @media ${(props) => props.theme.devices.desktop} {
+    .hamburger-bar {
+      display: none;
+    }
+  }
+
+  @media ${(props) => props.theme.devices.mobile} {
     .login-info {
       display: none;
     }
+
     .hamburger-bar {
       display: box;
+      cursor: pointer;
     }
-    .hamburger-bar li {
+    .hamburger-member {
       display: none;
+    }
+
+    .hamburger-bar:hover {
+      .hamburger-member {
+        display: flex;
+        background-color: ${(props) => props.theme.palette.lobelia};
+        flex-direction: column;
+        display: flex;
+        align-items: flex-start;
+        position: absolute;
+        right: 0;
+        z-index: 100;
+        border-radius: 30px;
+        padding: 0.2rem;
+        & li {
+          color: ${(props) => props.theme.palette.extrawhite};
+          display: flex;
+          flex-direction: flex-start;
+          justify-content: center;
+          align-items: center;
+          & a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        & img {
+          border-radius: 100%;
+          width: 38px;
+          border: 3px solid ${(props) => props.theme.palette.extrawhite};
+          margin-right: 10px;
+        }
+      }
     }
   }
 `;
@@ -80,39 +120,71 @@ const Members = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.palette.extrawhite};
   }
-  @media ${(props) => props.theme.devices.desktop} {
+
+  & ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  & li a {
+    color: ${(props) => props.theme.palette.extrawhite};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & img {
+    border-radius: 100%;
+    width: 38px;
+    border: 3px solid ${(props) => props.theme.palette.extrawhite};
+    margin: 10px;
+  }
+  @media ${(props) => props.theme.devices.mobile} {
     display: none;
   }
 `;
 
 export default function Header() {
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_AUTH_CALLBACK}`;
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  function handleAuth() {
+    if (token) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      navigate('/');
+    } else {
+      window.location.href = loginUri;
+    }
+  }
   return (
     <Container>
       <Info>
-        <a className="logo" href="/">
+        <a className='logo' href='/'>
           🎨 CHECKLIST GALLERY
         </a>
-        <div className="login-info">
-          <GitHubOauth>로그인</GitHubOauth>
+        <div className='login-info'>
+          <GitHubOauth token={token} handleAuth={handleAuth} />
         </div>
-        <ul className="hamburger-bar">
-          햄버거
-          <li>김주현</li>
-          <li>박민수</li>
-          <li>설재혁</li>
-          <li>이혜성</li>
-          <li>장덕준</li>
-          <li>김소리</li>
+        <ul href='#' className='hamburger-bar'>
+          <FontAwesomeIcon icon={faBars} />
+          <div className='hamburger-member'>
+            <GitHubOauth token={token} handleAuth={handleAuth} />
+            <GetUser />
+          </div>
         </ul>
       </Info>
       <Members>
         <div />
-        <a href="/">김주현</a>
-        <a href="/">박민수</a>
-        <a href="/">설재혁</a>
-        <a href="/">이혜성</a>
-        <a href="/">장덕준</a>
-        <a href="/">김소리</a>
+        <ul>
+          <li>
+            <a href='/gallery'>전체보기</a>
+          </li>
+          <GetUser />
+        </ul>
       </Members>
     </Container>
   );
