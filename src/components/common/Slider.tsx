@@ -99,7 +99,7 @@ function Carousel() {
 
   useEffect(() => {
     getPostsFromApi();
-  }, [posts]);
+  }, [categoryId]);
 
   return isLoading ? (
     <Loader />

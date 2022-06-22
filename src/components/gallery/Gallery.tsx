@@ -11,7 +11,7 @@ const GalleryContainer = styled.div`
 
   @media ${(props) => props.theme.devices.mobile} {
     width: 100%;
-  };
+  } ;
 `;
 
 function Gallery() {
