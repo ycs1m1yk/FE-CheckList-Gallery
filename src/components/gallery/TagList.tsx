@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledTagList = styled.div`
@@ -32,62 +32,48 @@ const Tag = styled.li`
   line-height: 1.5;
   color: ${(props) => props.theme.palette.triconblack};
   font-weight: bold;
+  cursor: pointer;
 
-  & span {
-      margin-left: 0.5rem;
-      color: ${(props) => props.theme.palette.daydream};
-      font-weight: normal;
-  };
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-
-  :hover {
-    text-decoration: underline;
-  };
-  
-  &.selected {
+  &.selected span {
     color: ${(props) => props.theme.palette.lobelia};
     font-weight: bold;
   }
 `;
 
-function TagList({ postCount, tags }) {
-  const [selectedId, setSelectedId] = useState('');
+const StyledSpan = styled.span`
+  margin-left: 0.5rem;
+  color: ${(props) => props.theme.palette.daydream};
+  font-weight: normal;
+
+  :hover {
+    text-decoration: underline;
+  };
+`;
+
+function TagList({ tags }) {
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
-    if (e.target.nodeName === 'A') {
-      setSelectedId(e.target.id);
+    const target = e.target.closest('li');
+    const id = target.dataset.id.split('taglist-')[1];
+    if (id === 'all') {
+      searchParams.delete('tag');
+    } else if (id) {
+      searchParams.set('tag', id);
     }
+    setSearchParams(searchParams);
   };
 
-  // TODO
-  // - [ ] 전체보기 카테고리 생기면 수정
   return (
     <StyledTagList className="TagList" onClick={handleClick}>
       <div>
         <div className="title">태그 목록</div>
         <ul>
-          <Tag key="allCategories">
-            <StyledLink to="/gallery" id="allCategories" className="Tag selected">전체보기</StyledLink>
-            <span>
-              (
-              {postCount}
-              )
-            </span>
-          </Tag>
           {tags.map(({ _id, name, post }) => (
-            <Tag key={_id} className="Tag">
-              <StyledLink to={`/gallery?tag=${_id}`} id={_id} className={`${_id === selectedId ? 'selected' : null}`}>{name}</StyledLink>
-              <span>
-                (
-                {post}
-                )
-              </span>
+            <Tag key={_id} data-id={`taglist-${_id}`} className={_id === searchParams.get('tag') ? 'selected' : undefined}>
+              <StyledSpan>{`${name}(${post})`}</StyledSpan>
             </Tag>
           ))}
         </ul>
