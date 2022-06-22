@@ -17,6 +17,7 @@ const GithubButton = styled.a`
   width: 120px;
   transition: all ease 0.3s;
   border: ${props => props.theme.palette.triconblack};
+  cursor: pointer;
   &:hover {
     background-color: ${props => props.theme.palette.triconblack};
     border: 1px white solid;
@@ -31,9 +32,9 @@ const GithubButton = styled.a`
 `;
 
 const LoginP = styled.p`
-  font-size: 18px;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: black;
+  color: #727272;
 `
 
 const LoginImg = styled.img`
@@ -42,15 +43,27 @@ const LoginImg = styled.img`
     margin-right: 16px;
 `
 
-
-
 export default function GitHubOauth() {
   const loginUri = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_AUTH_CALLBACK}`;
   console.log(loginUri);
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  function handleLAuth() {
+    if(token) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      navigate('/');
+    }
+    else {
+      window.location.href = loginUri;
+    }
+  }
+
   return (
-    <GithubButton href={loginUri}>
+    <GithubButton onClick={handleLAuth}>
       <LoginImg src={IconW} />
-      <LoginP>로그인</LoginP>
+      <LoginP>{token ? 'Logout' : 'Login'}</LoginP>
     </GithubButton>
   );
 }
