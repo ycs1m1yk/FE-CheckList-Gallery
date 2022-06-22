@@ -65,6 +65,9 @@ function Carousel() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const categoryId = query.get('tag');
+  const authorId = query.get('auth');
+  console.log(categoryId);
+  console.log(authorId);
 
   const settings = {
     infinite: true,
@@ -77,12 +80,13 @@ function Carousel() {
   // 작품 정보 얻어오기
   const getPostsFromApi = async () => {
     try {
-      if (!categoryId) {
+      if (!categoryId && !authorId) {
         const { data } = await postApi.getAllPosts();
         setPosts(data);
       } else {
         const params = {
           categoryId,
+          authorId,
         };
         const { data } = await postApi.getAllPosts(params);
         setPosts(data);
