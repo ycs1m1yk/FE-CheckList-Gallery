@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../../images/GithubIcon.png';
 import IconW from '../../images/GithubIconWhite.png';
-import { LoginContext } from '../../App';
+import PublishBtn from '../common/PublishBtn';
 
 const GithubButton = styled.a`
   display: flex;
@@ -43,28 +40,14 @@ const LoginImg = styled.img`
   margin-right: 16px;
 `;
 
-export default function GitHubOauth() {
-  const loginUri = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_AUTH_CALLBACK}`;
-  // const localToken = localStorage.getItem('token');
-  const navigate = useNavigate();
-  const { token, setToken } = useContext(LoginContext);
-
-  function handleLAuth() {
-    if (token) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      // setToken((token) => !token);
-      console.log(token);
-      navigate('/');
-    } else {
-      window.location.href = loginUri;
-    }
-  }
-
+export default function GitHubOauth({ token, handleAuth }) {
   return (
-    <GithubButton onClick={handleLAuth}>
-      <LoginImg src={IconW} />
-      <LoginP>{token ? 'Logout' : 'Login'}</LoginP>
-    </GithubButton>
+    <>
+      {token ? <PublishBtn /> : null}
+      <GithubButton onClick={handleAuth}>
+        <LoginImg src={IconW} />
+        <LoginP>{token ? 'Logout' : 'Login'}</LoginP>
+      </GithubButton>
+    </>
   );
 }
