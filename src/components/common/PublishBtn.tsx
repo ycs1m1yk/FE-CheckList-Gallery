@@ -6,7 +6,6 @@ const StyledBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* color: ${(props) => props.theme.palette.triconblack}; */
   background-color: ${(props) => props.theme.palette.extrawhite};
   padding: 6px;
   border: none;
@@ -32,8 +31,8 @@ const StyledBtn = styled.button`
 
 function PublishBtn() {
   return (
-    <Link to="publish">
-      <StyledBtn>publish</StyledBtn>
+    <Link to='publish'>
+      <StyledBtn>Publish</StyledBtn>
     </Link>
   );
 }
