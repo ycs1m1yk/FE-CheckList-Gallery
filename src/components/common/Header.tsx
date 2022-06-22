@@ -1,12 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import GetUser from './UserList';
 import GitHubOauth from '../auth/GitHubOauth';
-import PublishBtn from './PublishBtn';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { LoginContext } from '../../App';
 
 const Container = styled.div`
   width: 100%;
@@ -141,25 +138,34 @@ const Members = styled.div`
   }
 `;
 
-export default function Header({ isLogin }) {
-  const { token, setToken } = useContext(LoginContext);
-  console.log(isLogin);
+export default function Header() {
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_AUTH_CALLBACK}`;
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
+  function handleAuth() {
+    if (token) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      navigate('/');
+    } else {
+      window.location.href = loginUri;
+    }
+  }
   return (
     <Container>
       <Info>
-        <a className='logo' href='/'>
+        <a className="logo" href="/">
           🎨 CHECKLIST GALLERY
         </a>
-        <div className='login-info'>
-          {token && <PublishBtn />}
-          <GitHubOauth />
+        <div className="login-info">
+          <GitHubOauth token={token} handleAuth={handleAuth} />
         </div>
-        <ul href='#' className='hamburger-bar'>
+        <ul href="#" className="hamburger-bar">
           <FontAwesomeIcon icon={faBars} />
-          <div className='hamburger-member'>
-            <GitHubOauth />
-            {token && <PublishBtn />}
+          <div className="hamburger-member">
+            <GitHubOauth token={token} handleAuth={handleAuth} />
             <GetUser />
           </div>
         </ul>
@@ -168,7 +174,7 @@ export default function Header({ isLogin }) {
         <div />
         <ul>
           <li>
-            <a href='/gallery'>전체보기</a>
+            <a href="/gallery">전체보기</a>
           </li>
           <GetUser />
         </ul>

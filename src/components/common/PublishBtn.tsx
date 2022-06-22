@@ -32,7 +32,7 @@ const StyledBtn = styled.button`
 
 function PublishBtn() {
   return (
-    <Link to='publish'>
+    <Link to="publish">
       <StyledBtn>publish</StyledBtn>
     </Link>
   );

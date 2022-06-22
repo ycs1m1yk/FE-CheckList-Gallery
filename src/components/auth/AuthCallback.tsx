@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import Loader from '../common/Loader';
 import { authApi } from '../../lib/api';
-import { LoginContext } from '../../App';
+
 export default function AuthCallback() {
   const navigate = useNavigate();
 
   const [query] = useSearchParams();
   const code = query.get('code');
-  const { token, setToken } = useContext(LoginContext);
   useEffect(() => {
     if (code) {
       authApi
