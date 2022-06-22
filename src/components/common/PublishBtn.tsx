@@ -14,7 +14,7 @@ const StyledBtn = styled.button`
   width: 120px;
   transition: all ease 0.3s;
   border: ${(props) => props.theme.palette.triconblack};
-
+  cursor: pointer;
   & .btn {
     display: none;
   }
