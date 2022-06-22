@@ -6,8 +6,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 // import getUser from './UserList';
 import GetUser from './UserList';
 import GitHubOauth from './../auth/GitHubOauth';
+import Publish from './PublishBtn';
 
-const LOGIN_URL = 'http://ec2-3-128-87-34.us-east-2.compute.amazonaws.com/auth/github';
 const Container = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.palette.triconblack};
@@ -150,6 +150,7 @@ export default function Header() {
         </a>
         <div className='login-info'>
           <GitHubOauth />
+          <Publish />
         </div>
         <ul href='#' className='hamburger-bar'>
           <FontAwesomeIcon icon={faBars} />
