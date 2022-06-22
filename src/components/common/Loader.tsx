@@ -3,7 +3,7 @@ import ReactLoading from 'react-loading';
 
 function Loader() {
   return (
-    <div className='contentWrap'>
+    <div className="contentWrap">
       {' '}
       <div
         style={{
@@ -13,8 +13,12 @@ function Loader() {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <h2>Waiting</h2> <ReactLoading type='cylon' color='black' height='80%' width='80%' />{' '}
-      </div>{' '}
+        <h2>Waiting</h2>
+        {' '}
+        <ReactLoading type="cylon" color="black" height="80%" width="80%" />
+        {' '}
+      </div>
+      {' '}
     </div>
   );
 }

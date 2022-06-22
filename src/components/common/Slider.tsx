@@ -5,7 +5,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlay, faPause, faAngleLeft, faAngleRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { IAllPostProps } from '../../types/interface';
 import Loader from './Loader';
 import SliderItem from './SliderItem';
@@ -94,7 +96,7 @@ function Carousel() {
 
   useEffect(() => {
     getPostsFromApi();
-  }, [posts]);
+  }, [categoryId]);
 
   return isLoading ? (
     <Loader />
