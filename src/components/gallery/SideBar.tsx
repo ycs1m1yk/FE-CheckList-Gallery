@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ICategoryProps } from '../../types/interface';
 import { postApi, categoryApi } from '../../lib/api';
 import TagList from './TagList';
 import Tags from './Tags';
 
+interface TagProps extends ICategoryProps {
+  selected: boolean;
+}
+
 export default function SideBar() {
-  const selectedTagRef = useRef('');
+  const [isLoading, setIsLoading] = useState(true);
   const [postCount, setPostCount] = useState(0);
-  const [tags, setTags] = useState<ICategoryProps[]>([]);
+  const [tags, setTags] = useState<TagProps[]>([]);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -30,38 +34,47 @@ export default function SideBar() {
         name: '전체보기',
         lowerName: '전체보기',
         post: postCount,
+        selected: false,
         __v: 0,
       };
-      setTags([allTag, ...data]);
+      const newData = data.map((el) => ({ ...el, selected: false }));
+      setTags([allTag, ...newData]);
     } catch (err: any) {
       setError(err);
       console.log(err);
     }
+    setIsLoading(false);
   };
 
   const handleSelected = () => {
     const searchTag = searchParams.get('tag');
     const id = searchTag || 'all';
-    selectedTagRef.current = `tags-${id}`;
 
-    [...document.querySelectorAll('.selected')]?.forEach((el) => el.classList.remove('selected'));
-    document.querySelector(`[data-id=${selectedTagRef.current}]`)?.classList.add('selected');
-
-    selectedTagRef.current = `taglist-${id}`;
-    document.querySelector(`[data-id=${selectedTagRef.current}]`)?.classList.add('selected');
+    setTags((curr) => curr.map((el) => {
+      const { _id, selected } = el;
+      if (selected || _id === id) {
+        if (selected && _id === id) {
+          return el;
+        }
+        return { ...el, selected: !selected };
+      }
+      return el;
+    }));
   };
-
-  useEffect(() => {
-    handleSelected();
-  }, [searchParams]);
 
   useEffect(() => {
     getPosts();
   }, []);
 
   useEffect(() => {
-    getCategories();
+    if (postCount) {
+      getCategories();
+    }
   }, [postCount]);
+
+  useEffect(() => {
+    handleSelected();
+  }, [isLoading, searchParams]);
 
   return (
     <div className="SideBar" style={{ position: 'relative' }}>

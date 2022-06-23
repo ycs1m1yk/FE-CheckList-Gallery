@@ -71,8 +71,10 @@ function TagList({ tags }) {
       <div>
         <div className="title">태그 목록</div>
         <ul>
-          {tags.map(({ _id, name, post }) => (
-            <Tag key={_id} data-id={`taglist-${_id}`} className={_id === searchParams.get('tag') ? 'selected' : undefined}>
+          {tags.map(({
+            _id, name, post, selected,
+          }) => (
+            <Tag key={_id} data-id={`taglist-${_id}`} className={selected ? 'selected' : undefined}>
               <StyledSpan>{`${name}(${post})`}</StyledSpan>
             </Tag>
           ))}
