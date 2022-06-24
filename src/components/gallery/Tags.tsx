@@ -7,7 +7,6 @@ const StyledTags = styled.div`
   overflow-x: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-bottom: -1.75rem;
   cursor: pointer;
 
   & :not(:first-child) {
