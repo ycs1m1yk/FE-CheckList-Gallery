@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledTags = styled.div`
@@ -8,6 +8,7 @@ const StyledTags = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: -1.75rem;
+  cursor: pointer;
 
   & :not(:first-child) {
     margin-left: 0.5rem;
@@ -18,7 +19,7 @@ const StyledTags = styled.div`
   };
 `;
 
-const Tag = styled(Link)`
+const Tag = styled.span`
   flex-shrink: 0;
   height: 1.5rem;
   font-size: 0.75rem;
@@ -39,36 +40,28 @@ const Tag = styled(Link)`
   }
  `;
 
-function Tags({ postCount, tags }) {
-  const [selectedId, setSelectedId] = useState('');
+function Tags({ tags }) {
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
-    const target = e.target.closest('a');
-    setSelectedId(target.id);
+    const id = e.target.dataset.id.split('tags-')[1];
+    if (id === 'all') {
+      searchParams.delete('tag');
+    } else {
+      searchParams.set('tag', id);
+    }
+    setSearchParams(searchParams);
   };
 
-  // TODO
-  // - [ ] 전체보기 카테고리 생기면 수정
   return (
     <StyledTags className="Tags" onClick={handleClick}>
-      <Tag key="allCategories" to="/gallery" id="allCategories" className="Tag selected">
-        전체보기
-        <span>
-          (
-          {postCount}
-          )
-        </span>
-      </Tag>
-      {tags.map(({ _id, name, post }) => (
-        <Tag key={_id} id={_id} to={`/gallery?tag=${_id}`} className={`Tag ${_id === selectedId ? 'selected' : null}`}>
-          {name}
-          <span>
-            (
-            {post}
-            )
-          </span>
+      {tags.map(({
+        _id, name, post, selected,
+      }) => (
+        <Tag key={_id} data-id={`tags-${_id}`} className={selected ? 'selected' : undefined}>
+          {`${name}(${post})`}
         </Tag>
       ))}
     </StyledTags>
