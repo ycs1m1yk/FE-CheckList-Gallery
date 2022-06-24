@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ICategoryListProps } from '../../types/interface';
 import noImage from '../../images/noImage.jpeg';
+import Message from './Message';
 
 const Container = styled.div`
   display: flex;

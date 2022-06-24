@@ -8,6 +8,7 @@ declare module 'styled-components'{
             daydream: string,
             lobelia: string,
             extrawhite: string,
+            africanruby: string,
         }
         devices: {
             desktop: string,

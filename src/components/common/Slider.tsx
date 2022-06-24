@@ -12,6 +12,7 @@ import { IAllPostProps } from '../../types/interface';
 import Loader from './Loader';
 import SliderItem from './SliderItem';
 import { postApi } from '../../lib/api';
+import Message from './Message';
 
 const ButtonContainer = styled.div`
   text-align: center;
@@ -66,8 +67,6 @@ function Carousel() {
   const query = new URLSearchParams(location.search);
   const categoryId = query.get('tag');
   const authorId = query.get('auth');
-  console.log(categoryId);
-  console.log(authorId);
 
   const settings = {
     infinite: true,
@@ -106,40 +105,43 @@ function Carousel() {
     <Loader />
   ) : (
     /* eslint-disable react/jsx-props-no-spreading */
-    <Slider ref={sliderRef} {...settings}>
-      {posts.map((post) => (
-        <>
-          <SliderItem post={post} />
-          <ButtonContainer>
-            <PrevButton onClick={() => sliderRef?.current?.slickPrev()}>
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </PrevButton>
-            <PauseButton
-              isPlay={sliderPlay}
-              onClick={() => {
-                sliderRef?.current?.slickPause();
-                setSliderPlay((cur) => !cur);
-              }}
-            >
-              <FontAwesomeIcon icon={faPause} />
-            </PauseButton>
-            <PlayButton
-              isPlay={sliderPlay}
-              onClick={() => {
-                sliderRef?.current?.slickPlay();
-                setSliderPlay((cur) => !cur);
-              }}
-            >
-              <FontAwesomeIcon icon={faPlay} />
-            </PlayButton>
-            <NextButton onClick={() => sliderRef?.current?.slickNext()}>
-              <FontAwesomeIcon icon={faAngleRight} />
-            </NextButton>
-          </ButtonContainer>
-        </>
-      ))}
-      {error && <div>Error Occured</div>}
-    </Slider>
+    <>
+      <Slider ref={sliderRef} {...settings}>
+        {posts.map((post) => (
+          <>
+            <SliderItem post={post} />
+            <ButtonContainer>
+              <PrevButton onClick={() => sliderRef?.current?.slickPrev()}>
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </PrevButton>
+              <PauseButton
+                isPlay={sliderPlay}
+                onClick={() => {
+                  sliderRef?.current?.slickPause();
+                  setSliderPlay((cur) => !cur);
+                }}
+              >
+                <FontAwesomeIcon icon={faPause} />
+              </PauseButton>
+              <PlayButton
+                isPlay={sliderPlay}
+                onClick={() => {
+                  sliderRef?.current?.slickPlay();
+                  setSliderPlay((cur) => !cur);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlay} />
+              </PlayButton>
+              <NextButton onClick={() => sliderRef?.current?.slickNext()}>
+                <FontAwesomeIcon icon={faAngleRight} />
+              </NextButton>
+            </ButtonContainer>
+          </>
+        ))}
+      </Slider>
+      {!posts.length && !error && <Message color={(props) => props.theme.palette.triconblack} message="해당 작가의 작품이 존재하지 않습니다." />}
+      {error && <Message color={(props) => props.theme.palette.africanruby} message="정보를 불러오는데 오류가 발생했습니다." />}
+    </>
   );
 }
 
