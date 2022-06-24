@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import GetUser from './UserList';
 import GitHubOauth from '../auth/GitHubOauth';
 
@@ -164,9 +164,9 @@ export default function Header() {
   return (
     <Container>
       <Info>
-        <a className="logo" href="/">
+        <Link className="logo" to="/">
           🎨 CHECKLIST GALLERY
-        </a>
+        </Link>
         <div className="login-info">
           <GitHubOauth token={token} handleAuth={handleAuth} />
         </div>
@@ -179,10 +179,9 @@ export default function Header() {
         </ul>
       </Info>
       <Members>
-        <div />
         <ul>
           <li>
-            <a href="/gallery">전체보기</a>
+            <Link to="/gallery">전체보기</Link>
           </li>
           <GetUser />
         </ul>
