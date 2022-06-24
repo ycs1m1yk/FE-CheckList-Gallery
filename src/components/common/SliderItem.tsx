@@ -98,10 +98,7 @@ function SliderItem({ post }: any) {
             <SliderItemAuthor>
               Made By
               {' '}
-              {/* 작가 페이지로 이동하는 경우  */}
-              <Link style={{ textDecoration: 'none' }} to="#">
-                {post.author.username}
-              </Link>
+              {post.author.username}
             </SliderItemAuthor>
           )}
         </ItemHeaderContainer>
