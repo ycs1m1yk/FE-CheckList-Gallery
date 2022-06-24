@@ -15,6 +15,7 @@ import { postApi } from '../../lib/api';
 
 const ButtonContainer = styled.div`
   text-align: center;
+  margin-top: 1rem;
   & :not(:first-child) {
     margin-left: 1rem;
   }
@@ -66,8 +67,6 @@ function Carousel() {
   const query = new URLSearchParams(location.search);
   const categoryId = query.get('tag');
   const authorId = query.get('auth');
-  console.log(categoryId);
-  console.log(authorId);
 
   const settings = {
     infinite: true,

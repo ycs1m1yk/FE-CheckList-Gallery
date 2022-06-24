@@ -31,7 +31,7 @@ const StyledBtn = styled.button`
 
 function PublishBtn() {
   return (
-    <Link to='publish'>
+    <Link to="publish">
       <StyledBtn>Publish</StyledBtn>
     </Link>
   );

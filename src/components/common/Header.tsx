@@ -13,6 +13,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  margin-bottom: 1rem;
+  height: 8rem;
+  @media ${(props) => props.theme.devices.mobile} {
+    height: 5rem;
+  }
 `;
 
 const Info = styled.div`
@@ -163,15 +168,15 @@ export default function Header() {
   return (
     <Container>
       <Info>
-        <a className='logo' href='/'>
+        <a className="logo" href="/">
           🎨 CHECKLIST GALLERY
         </a>
-        <div className='login-info'>
+        <div className="login-info">
           <GitHubOauth token={token} handleAuth={handleAuth} />
         </div>
-        <ul href='#' className='hamburger-bar'>
+        <ul href="#" className="hamburger-bar">
           <FontAwesomeIcon icon={faBars} />
-          <div className='hamburger-member'>
+          <div className="hamburger-member">
             <GitHubOauth token={token} handleAuth={handleAuth} />
             <GetUser />
           </div>
@@ -181,7 +186,7 @@ export default function Header() {
         <div />
         <ul>
           <li>
-            <a href='/gallery'>전체보기</a>
+            <a href="/gallery">전체보기</a>
           </li>
           <GetUser />
         </ul>
