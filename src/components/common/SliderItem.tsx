@@ -110,7 +110,7 @@ function SliderItem({ post }: any) {
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
-            <SliderItemTag to="#">{category.name}</SliderItemTag>
+            <SliderItemTag to={`/gallery?tag=${category._id}`}>{category.name}</SliderItemTag>
           ))}
         </SliderItemTagContainer>
       </SliderItemContainer>
