@@ -26,7 +26,7 @@ const Info = styled.div`
   height: 90px;
   align-items: center;
   justify-content: space-between;
-  font-size: 20px;
+  font-size: 1rem;
 
   & .logo {
     font-size: 40px;
@@ -116,10 +116,6 @@ const Members = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-
-  & div {
-    width: 11.5rem;
-  }
 
   & a {
     text-decoration: none;
