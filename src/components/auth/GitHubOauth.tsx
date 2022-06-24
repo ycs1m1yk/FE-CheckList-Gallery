@@ -7,11 +7,11 @@ const GithubButton = styled.a`
   align-items: center;
   justify-content: center;
   background-color: ${(props) => props.theme.palette.extrawhite};
-  padding: 6px;
   border: none;
   border-radius: 5px;
   box-sizing: border-box;
-  width: 120px;
+  width: 8rem;
+  height: 2rem;
   transition: all ease 0.3s;
   border: ${(props) => props.theme.palette.triconblack};
   cursor: pointer;
@@ -29,15 +29,15 @@ const GithubButton = styled.a`
 `;
 
 const LoginP = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: #727272;
 `;
 
 const LoginImg = styled.img`
-  width: 26px;
-  height: 26px;
-  margin-right: 16px;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: 0.5rem;
 `;
 
 export default function GitHubOauth({ token, handleAuth }) {
