@@ -13,7 +13,7 @@ const Container = styled.div`
 const SliderItemContainer = styled.div`
   width: 50rem;
   height: 33rem;
-  margin: 2rem 0;
+  margin: 0 0;
   border-radius: 5%;
   background-color: ${(props) => props.theme.palette.extrawhite};
 
