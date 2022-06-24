@@ -98,10 +98,7 @@ function SliderItem({ post }: any) {
             <SliderItemAuthor>
               Made By
               {' '}
-              {/* 작가 페이지로 이동하는 경우  */}
-              <Link style={{ textDecoration: 'none' }} to="#">
-                {post.author.username}
-              </Link>
+              {post.author.username}
             </SliderItemAuthor>
           )}
         </ItemHeaderContainer>
@@ -110,7 +107,7 @@ function SliderItem({ post }: any) {
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
-            <SliderItemTag to="#">{category.name}</SliderItemTag>
+            <SliderItemTag to={`/gallery?tag=${category._id}`}>{category.name}</SliderItemTag>
           ))}
         </SliderItemTagContainer>
       </SliderItemContainer>
