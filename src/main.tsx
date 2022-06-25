@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from './styles/global-style';
-import { theme } from './styles/theme';
+import { GlobalStyle } from '@styles/global-style';
+import { theme } from '@styles/theme';
 
 import App from './App';
 

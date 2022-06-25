@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import IconW from '../../images/GithubIconWhite.png';
-import PublishBtn from '../common/PublishBtn';
+import IconW from '@images/GithubIconWhite.png';
+import PublishBtn from '@components/common/PublishBtn';
 
 const GithubButton = styled.a`
   display: flex;
@@ -23,7 +23,7 @@ const GithubButton = styled.a`
     }
 
     & img {
-      background-image: url('../../images/GithubIconWhite.png');
+      background-image: url('@images/GithubIconWhite.png');
     }
   }
 `;

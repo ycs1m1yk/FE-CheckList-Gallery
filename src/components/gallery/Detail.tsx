@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
-import { postApi } from '../../lib/api';
-import { IAllPostProps } from '../../types/interface';
-import Loader from '../common/Loader';
+import { postApi } from '@lib/api';
+import { IAllPostProps } from '@types/interface';
+import Loader from '@components/common/Loader';
 
 const TagLink = styled(Link)`
   text-decoration: none;

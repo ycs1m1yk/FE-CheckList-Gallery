@@ -6,7 +6,7 @@ import { darken } from 'polished';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolderMinus } from '@fortawesome/free-solid-svg-icons';
 
-import { FileProps } from '../types/interface';
+import { FileProps } from '@types/interface';
 
 interface FileUploadProps{
   name:string,

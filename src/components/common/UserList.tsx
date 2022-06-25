@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { userApi } from '../../lib/api';
-import { IAuthorProps } from '../../types/interface';
+import { userApi } from '@lib/api';
+import { IAuthorProps } from '@types/interface';
 
 function getUser() {
   const [error, setError] = useState(null);

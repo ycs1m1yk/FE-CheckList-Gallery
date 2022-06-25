@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import GitHubOauth from '@components/auth/GitHubOauth';
 import GetUser from './UserList';
-import GitHubOauth from '../auth/GitHubOauth';
 
 const Container = styled.div`
   width: 100%;
