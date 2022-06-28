@@ -10,8 +10,6 @@ const Container = styled.div`
   height: 100vh;
   background-image: url("https://i.gifer.com/81mz.gif");
   background-size: cover;
-  margin: 0;
-  padding: 0;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 `;
 
@@ -22,11 +20,17 @@ const TitleContainer = styled.div`
 const MainTitle = styled.div`
   font-size: 3rem;
   margin-bottom: 1rem;
+  @media screen and ${(props) => props.theme.devices.mobile} {
+    font-size: 2rem; 
+  }
 `;
 
 const SubTitle = styled.div`
   font-size: 1.5rem;
   text-align: center;
+  @media screen and ${(props) => props.theme.devices.mobile} {
+    font-size: 1rem;
+  }
 `;
 
 const EnterLink = styled(Link)`
@@ -34,17 +38,21 @@ const EnterLink = styled(Link)`
   bottom: 30%;
   left: 45%;
   color: white;
-  margin-top: 1rem;
   text-decoration: none;
   font-size: 1.5rem;
   border: 1px solid white;
   padding: 0.5rem;
   border-radius: 1rem;
-  &: hover {
+  :hover {
     background-color: white;
     color: black;
     transition: all 0.3s ease-in-out;
     transform: scale(1.1);
+  }
+
+  @media screen and ${(props) => props.theme.devices.mobile} {
+    left: 40%;
+    bottom: 35%;
   }
 `;
 
