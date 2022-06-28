@@ -5,17 +5,15 @@ import { userApi } from '@lib/api';
 import { IAuthorProps } from '@types/interface';
 
 const AuthorList = styled.li`
-
+  
 `;
 
 const AuthorLink = styled(Link)<{isMatch: boolean}>`
-  border-bottom: ${(props) => (props.isMatch ? `3px solid ${props.theme.palette.daydream}` : null)};
-  padding-right: 0.5rem;
+  width: 100%;
+  border-bottom: ${(props) => (props.isMatch ? `3px solid ${props.theme.palette.africanruby}` : null)};
 `;
 
-const AuthorImg = styled.img`
-  padding: 0;
-`;
+const AuthorImg = styled.img``;
 
 function getUser() {
   const [error, setError] = useState(null);
