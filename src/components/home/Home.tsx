@@ -8,7 +8,8 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100vh;
-  background-image: url("https://i.gifer.com/76YS.gif");
+  background-image: url("https://i.gifer.com/81mz.gif");
+  background-size: cover;
   margin: 0;
   padding: 0;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -42,6 +43,8 @@ const EnterLink = styled(Link)`
   &: hover {
     background-color: white;
     color: black;
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
   }
 `;
 
