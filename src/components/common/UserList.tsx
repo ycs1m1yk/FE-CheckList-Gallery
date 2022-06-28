@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSearchParams, Link } from 'react-router-dom';
-import { userApi } from '../../lib/api';
-import { IAuthorProps } from '../../types/interface';
+import { userApi } from '@lib/api';
+import { IAuthorProps } from '@types/interface';
 
 const AuthorList = styled.li`
 

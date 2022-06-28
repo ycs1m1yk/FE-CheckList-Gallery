@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Slider from '../common/Slider';
-import Loader from '../common/Loader';
+import Slider from '@components/common/Slider';
+import Loader from '@components/common/Loader';
 import SideBar from './SideBar';
 
 const GalleryContainer = styled.div`

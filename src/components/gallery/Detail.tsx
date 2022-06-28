@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
-import { postApi } from '../../lib/api';
-import { IAllPostProps } from '../../types/interface';
-import Loader from '../common/Loader';
-import { DetailViewer } from '../../lib/DetailViewer';
+import Loader from '@components/common/Loader';
+import { IAllPostProps } from '@types/interface';
+import { postApi } from '@lib/api';
+import { DetailViewer } from '@lib/DetailViewer';
 
 const TagLink = styled(Link)`
   text-decoration: none;

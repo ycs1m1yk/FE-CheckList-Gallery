@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { lighten } from 'polished';
-import { MarkdownEditor, MarkdownViewer } from '../../lib/Markdown';
-import FileUpload from '../../lib/FileUpload';
-import { FileProps } from '../../types/interface';
-import { postApi } from '../../lib/api';
+import { MarkdownEditor, MarkdownViewer } from '@lib/Markdown';
+import FileUpload from '@lib/FileUpload';
+import { FileProps } from '@types/interface';
+import { postApi } from '@lib/api';
 
 const Container = styled.div`
   width:100%;

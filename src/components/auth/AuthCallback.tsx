@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import Loader from '../common/Loader';
-import { authApi } from '../../lib/api';
+import Loader from '@components/common/Loader';
+import { authApi } from '@lib/api';
 
 export default function AuthCallback() {
   const navigate = useNavigate();
