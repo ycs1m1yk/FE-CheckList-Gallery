@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { lighten } from 'polished';
-import { MarkdownEditor, MarkdownViewer } from '../../lib/Markdown';
-import FileUpload from '../../lib/FileUpload';
-import { FileProps } from '../../types/interface';
-import { postApi } from '../../lib/api';
+import { MarkdownEditor, MarkdownViewer } from '@lib/Markdown';
+import FileUpload from '@lib/FileUpload';
+import { FileProps } from '@types/interface';
+import { postApi } from '@lib/api';
 
 const Container = styled.div`
   width:100%;
@@ -224,7 +224,7 @@ export default function Publish() {
         <h2>Code</h2>
         <FileUploadContainer>
           <h3>코드 업로드 유의사항</h3>
-          <br/>
+          <br />
           <h4>✅ 코드 확장자는 .jsx만 가능합니다.</h4>
           <h4>✅ 코드는 여러 개 업로드 가능합니다.</h4>
           <h4>✅ 코드파일은 한 폴더에 저장됩니다.</h4>

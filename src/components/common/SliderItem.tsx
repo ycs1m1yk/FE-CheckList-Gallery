@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ICategoryListProps } from '../../types/interface';
-import noImage from '../../images/noImage.jpeg';
+import { ICategoryListProps } from '@types/interface';
+import noImage from '@images/noImage.jpeg';
 
 const Container = styled.div`
   display: flex;
@@ -102,7 +102,10 @@ function SliderItem({ post }: any) {
             </SliderItemAuthor>
           )}
         </ItemHeaderContainer>
-        <SliderItemImage onClick={handleNavigate} src={post.thumbnail ? post.thumbnail.fileUrl : noImage} />
+        <SliderItemImage
+          onClick={handleNavigate}
+          src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
+        />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>

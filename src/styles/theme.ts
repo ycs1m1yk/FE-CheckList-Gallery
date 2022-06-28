@@ -12,6 +12,7 @@ export const theme: DefaultTheme = {
     daydream: '#BFC1CE',
     lobelia: '#7D95C1',
     extrawhite: '#EFF0EB',
+    africanruby: '#d63031',
   },
   devices: {
     desktop: `(min-width: ${size.desktop})`,
