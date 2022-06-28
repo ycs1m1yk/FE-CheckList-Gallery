@@ -50,13 +50,6 @@ const PlayButton = styled(Button)<{ isPlay: boolean }>`
 
 const NextButton = styled(Button)``;
 
-/*
-  TODO
-  [] 슬라이더 넘어가면서 잔상이 남는 문제 해결
-  [] User Post만을 위한 슬라이더가 아닌 모든 데이터를 Slider로 만들 수 있게끔
-    -> state, Interface, API Request를 확장성 있게 만들어야 함
-*/
-
 function Carousel() {
   const [posts, setPosts] = useState<IAllPostProps[]>([]);
   const [error, setError] = useState(null);
@@ -99,7 +92,7 @@ function Carousel() {
 
   useEffect(() => {
     getPostsFromApi();
-  }, [categoryId]);
+  }, [categoryId, authorId]);
 
   return isLoading ? (
     <Loader />
