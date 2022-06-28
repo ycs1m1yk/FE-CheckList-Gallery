@@ -102,7 +102,10 @@ function SliderItem({ post }: any) {
             </SliderItemAuthor>
           )}
         </ItemHeaderContainer>
-        <SliderItemImage onClick={handleNavigate} src={post.thumbnail ? post.thumbnail.fileUrl : noImage} />
+        <SliderItemImage
+          onClick={handleNavigate}
+          src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
+        />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>{post.description}</SliderItemDescription>
         <SliderItemTagContainer>

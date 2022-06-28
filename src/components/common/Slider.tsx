@@ -12,6 +12,7 @@ import { IAllPostProps } from '@types/interface';
 import { postApi } from '@lib/api';
 import Loader from './Loader';
 import SliderItem from './SliderItem';
+import Message from './Message';
 
 const ButtonContainer = styled.div`
   text-align: center;
@@ -49,13 +50,6 @@ const PlayButton = styled(Button)<{ isPlay: boolean }>`
 `;
 
 const NextButton = styled(Button)``;
-
-/*
-  TODO
-  [] 슬라이더 넘어가면서 잔상이 남는 문제 해결
-  [] User Post만을 위한 슬라이더가 아닌 모든 데이터를 Slider로 만들 수 있게끔
-    -> state, Interface, API Request를 확장성 있게 만들어야 함
-*/
 
 function Carousel() {
   const [posts, setPosts] = useState<IAllPostProps[]>([]);
@@ -99,46 +93,49 @@ function Carousel() {
 
   useEffect(() => {
     getPostsFromApi();
-  }, [categoryId]);
+  }, [categoryId, authorId]);
 
   return isLoading ? (
     <Loader />
   ) : (
     /* eslint-disable react/jsx-props-no-spreading */
-    <Slider ref={sliderRef} {...settings}>
-      {posts.map((post) => (
-        <>
-          <SliderItem post={post} />
-          <ButtonContainer>
-            <PrevButton onClick={() => sliderRef?.current?.slickPrev()}>
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </PrevButton>
-            <PauseButton
-              isPlay={sliderPlay}
-              onClick={() => {
-                sliderRef?.current?.slickPause();
-                setSliderPlay((cur) => !cur);
-              }}
-            >
-              <FontAwesomeIcon icon={faPause} />
-            </PauseButton>
-            <PlayButton
-              isPlay={sliderPlay}
-              onClick={() => {
-                sliderRef?.current?.slickPlay();
-                setSliderPlay((cur) => !cur);
-              }}
-            >
-              <FontAwesomeIcon icon={faPlay} />
-            </PlayButton>
-            <NextButton onClick={() => sliderRef?.current?.slickNext()}>
-              <FontAwesomeIcon icon={faAngleRight} />
-            </NextButton>
-          </ButtonContainer>
-        </>
-      ))}
-      {error && <div>Error Occured</div>}
-    </Slider>
+    <>
+      <Slider ref={sliderRef} {...settings}>
+        {posts.map((post) => (
+          <>
+            <SliderItem post={post} />
+            <ButtonContainer>
+              <PrevButton onClick={() => sliderRef?.current?.slickPrev()}>
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </PrevButton>
+              <PauseButton
+                isPlay={sliderPlay}
+                onClick={() => {
+                  sliderRef?.current?.slickPause();
+                  setSliderPlay((cur) => !cur);
+                }}
+              >
+                <FontAwesomeIcon icon={faPause} />
+              </PauseButton>
+              <PlayButton
+                isPlay={sliderPlay}
+                onClick={() => {
+                  sliderRef?.current?.slickPlay();
+                  setSliderPlay((cur) => !cur);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlay} />
+              </PlayButton>
+              <NextButton onClick={() => sliderRef?.current?.slickNext()}>
+                <FontAwesomeIcon icon={faAngleRight} />
+              </NextButton>
+            </ButtonContainer>
+          </>
+        ))}
+      </Slider>
+      {!posts.length && !error && <Message color={(props) => props.theme.palette.triconblack} message="해당 작가의 작품이 존재하지 않습니다." />}
+      {error && <Message color={(props) => props.theme.palette.africanruby} message="정보를 불러오는데 오류가 발생했습니다." />}
+    </>
   );
 }
 
