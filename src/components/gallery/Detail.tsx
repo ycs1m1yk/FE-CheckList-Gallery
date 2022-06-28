@@ -83,7 +83,7 @@ export default function Detail() {
   const getPostFromApi = async () => {
     try {
       const { data } = await postApi.getPostById(postId);
-      console.log(data)
+      console.log(data);
       setPost(data);
     } catch (e) {
       console.log(e);
@@ -103,7 +103,7 @@ export default function Detail() {
       <Title title={post?.title} />
       <Tags categories={post?.categories} />
       <Body description={post?.description} />
-      <DetailViewer files={post?.code}/>
+      <DetailViewer files={post?.code} />
     </DetailContainer>
   );
 }
