@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { postApi } from '../../lib/api';
 import { IAllPostProps } from '../../types/interface';
 
@@ -23,6 +24,11 @@ const PostItem = styled.div`
   padding: 1rem;
 `;
 
+const PostTitle = styled.span`
+  cursor: pointer;
+  margin-top: 0.5rem;
+`;
+
 const DeleteButton = styled.button`
   position: relative;
   margin-left: 50%;
@@ -41,6 +47,7 @@ const DeleteButton = styled.button`
 function Edit() {
   const [posts, setPosts] = useState<IAllPostProps[]>([]);
   const [flag, setFlag] = useState(false);
+  const navigate = useNavigate();
 
   const authorId = window.localStorage.getItem('authorId');
   const token = window.localStorage.getItem('token');
@@ -48,6 +55,10 @@ function Edit() {
   const getAuthorPostFromApi = async () => {
     const { data } = await postApi.getAllPosts({ authorId });
     setPosts(data);
+  };
+
+  const handleRouteDetail = (postId) => {
+    navigate(`/gallery/${postId}`);
   };
 
   const handleDelete = async (postId: string) => {
@@ -70,7 +81,7 @@ function Edit() {
     <PostList>
       {posts.map((post) => (
         <PostItem key={post._id}>
-          {post.title}
+          <PostTitle onClick={(e) => handleRouteDetail(post._id)}>{post.title}</PostTitle>
           {/* <DeleteButton onClick={(e) => handleDelete(post._id)}>삭제</DeleteButton> */}
           <DeleteButton onClick={(e) => handleDelete(post._id)}>삭제</DeleteButton>
         </PostItem>
