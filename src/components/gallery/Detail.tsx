@@ -5,10 +5,31 @@ import Loader from '@components/common/Loader';
 import { IAllPostProps } from '@types/interface';
 import { postApi } from '@lib/api';
 import { DetailViewer } from '@lib/DetailViewer';
+import axios from 'axios';
 import { MarkdownViewer } from '../../lib/Markdown';
+
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 
 const TagLink = styled(Link)`
   text-decoration: none;
+`;
+
+const CodeToggle = styled.button`
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: ${(props) => (props.openState ? props.theme.palette.lobelia : props.theme.palette.africanviolet)};
+  transition: 0.3s ease all;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 24px;
+  color: white;
 `;
 
 const BodyBox = styled.div`
@@ -44,7 +65,7 @@ const DetailContainer = styled.div`
   @media screen and ${(props) => props.theme.devices.desktop}{
 
   }
-   @media screen and ${(props) => props.theme.devices.mobile}{
+  @media screen and ${(props) => props.theme.devices.mobile}{
     width: 90%;
   }
 
@@ -55,6 +76,9 @@ const DetailContainer = styled.div`
     margin: 5px;
     line-height: 20px;
   }
+`;
+
+const CodeViewerContainer = styled.div`
 `;
 
 function Title({ title }: any) {
@@ -80,21 +104,45 @@ function Tags({ categories }: any) {
 function Body({ description }: any) {
   return (
     <BodyBox>
-      <MarkdownViewer text={description}></MarkdownViewer>
+      <MarkdownViewer text={description} />
     </BodyBox>
   );
+}
+
+function CodeViewer({code}:{fileName:string, fileData:string}) {
+  const [openState, setOpenState] = useState<boolean>(false);
+
+  function handleToggle() {
+    setOpenState((cur) => !cur);
+  }
+
+  return (
+    <>
+      <CodeToggle openState={openState} onClick={handleToggle}>{openState ? code.fileName + ' ▲' : code.fileName + ' ▼'}</CodeToggle>
+      {openState && <CodeViewerContainer openState={openState}>
+        <Viewer
+          initialValue={'```js '+code.fileData+'```'}
+          plugins={[[codeSyntaxHighlight, {highlighter: Prism}]]} />
+      </CodeViewerContainer>}
+    </>
+  )
 }
 
 export default function Detail() {
   const [post, setPost] = useState<IAllPostProps | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [code, setCode] = useState<{fileName: string, fileData: string}[]>([]);
 
   const { postId } = useParams();
 
   const getPostFromApi = async () => {
     try {
       const { data } = await postApi.getPostById(postId);
-      console.log(data);
+      const codes = await Promise.all(data.code.map(async ({ fileName, fileUrl }) => {
+        const temp = await axios(fileUrl);
+        return { fileName, fileData: temp.data };
+      }));
+      setCode(codes);
       setPost(data);
     } catch (e) {
       console.log(e);
@@ -115,6 +163,7 @@ export default function Detail() {
         <Title title={post?.title} />
         <Tags categories={post?.categories} />
         <Body description={post?.description} />
+        {code.map(data => <CodeViewer code={data} />)}
         <DetailViewer files={post?.code} />
       </DetailContainer>
     </Container>
