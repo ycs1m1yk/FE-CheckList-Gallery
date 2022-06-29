@@ -17,7 +17,7 @@ const SliderItemContainer = styled.div`
   border-radius: 5%;
   background-color: ${(props) => props.theme.palette.extrawhite};
 
-  @media screen and (max-width: 767px) {
+  @media screen and ${(props) => props.theme.devices.mobile} {
     width: 30rem;
     height: 28rem;
   }
@@ -46,7 +46,7 @@ const SliderItemImage = styled.img`
   height: 20rem;
   padding: 2rem;
   margin: 1rem auto;
-  @media screen and (max-width: 767px) {
+  @media screen and ${(props) => props.theme.devices.mobile} {
     width: 20rem;
     height: 15rem;
   }
@@ -60,7 +60,14 @@ const SliderItemTitle = styled.div`
 const SliderItemDescription = styled.div`
   font-size: 1.2rem;
   text-align: center;
-  margin: 1rem;
+  width: 45rem;
+  margin: 1rem 1.5rem;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  @media screen and ${(props) => props.theme.devices.mobile} {
+    width: 27rem;
+  }
 `;
 
 const SliderItemTagContainer = styled.div`
@@ -69,7 +76,7 @@ const SliderItemTagContainer = styled.div`
   & :last-child {
     margin-right: 1rem;
   }
-  @media screen and (max-width: 767px) {
+  @media screen and ${(props) => props.theme.devices.mobile} {
     text-align: center;
     margin-top: 2rem;
   }
@@ -108,7 +115,7 @@ function SliderItem({ post }: any) {
         />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>
-          {post.description.length > 50 ? `${post.description.slice(0, 50)}...` : post.description}
+          {post.description}
         </SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
