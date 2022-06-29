@@ -14,8 +14,10 @@ export default function AuthCallback() {
         .getAuthToken(code)
         .then((data) => {
           const response = data.data;
+          console.log(response);
           window.localStorage.setItem('token', response.token);
           window.localStorage.setItem('user', response.username);
+          window.localStorage.setItem('authorId', response.userId);
           navigate('/gallery');
         })
         .catch((e) => {
