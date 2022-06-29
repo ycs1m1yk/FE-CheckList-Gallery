@@ -20,13 +20,11 @@ export function DetailViewer({ files }:{files: ICodeProps[]}) {
   useEffect(() => {
     if (files) {
       files.forEach((file) => {
-        if (file.fileName === 'Default.jsx') {
+        if (file.fileName === 'index.jsx') {
           const fileEndPoint = file.fileUrl
             .split('/')
-            .slice(-2)
-            .join('/')
-            .slice(0, -4);
-          console.log(fileEndPoint);
+            .slice(-2, -1)
+            .join();
           setDefaultFile(fileEndPoint);
         }
       });
@@ -34,7 +32,7 @@ export function DetailViewer({ files }:{files: ICodeProps[]}) {
   }, []);
   return (
     <Container>
-      {defaultFile && <FrameViewer scrolling="no" maginwidth="0" marginheight="0" frameborder="0" src={`${import.meta.env.VITE_API_URL}view` + `/${defaultFile}`} />}
+      {defaultFile && <FrameViewer maginwidth="0" marginheight="0" frameborder="0" src={`${import.meta.env.VITE_VIEWER_URL}/${defaultFile}`} />}
     </Container>
   );
 }

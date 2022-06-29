@@ -229,7 +229,7 @@ export default function Publish() {
           <h4>✅ 코드는 여러 개 업로드 가능합니다.</h4>
           <h4>✅ 코드파일은 한 폴더에 저장됩니다.</h4>
           <h4>✅ styled-component 외 별도의 라이브러리를 사용하시면 작동하지 않습니다.</h4>
-          <h4>✅ 코드파일 중 Default.jsx라는 이름의 파일을 반드시 포함해야하며, 그 파일 내 default로 export된 컴포넌트만이 실행됩니다. </h4>
+          <h4>✅ 코드파일 중 index.jsx라는 이름의 파일을 반드시 포함해야하며, 그 파일 내 default로 export된 컴포넌트만이 실행됩니다. </h4>
         </FileUploadContainer>
         <FileUploadContainer>
           <FileUpload name="code" multiple fileState={codeList} setFileState={setCodeList} />
