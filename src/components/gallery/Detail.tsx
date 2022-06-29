@@ -5,6 +5,7 @@ import Loader from '@components/common/Loader';
 import { IAllPostProps } from '@types/interface';
 import { postApi } from '@lib/api';
 import { DetailViewer } from '@lib/DetailViewer';
+import { MarkdownViewer } from '../../lib/Markdown';
 
 const TagLink = styled(Link)`
   text-decoration: none;
@@ -12,15 +13,14 @@ const TagLink = styled(Link)`
 
 const BodyBox = styled.div`
   margin-bottom: 40px;
-  font-size: 24px;
 `;
 
 const TagBox = styled.div`
   display: flex;
   margin-bottom: 40px;
+  margin-top: 20px;
   & a {
     margin-right: 10px;
-    font-size: 16px;
     background-color: ${(props) => props.theme.palette.triconblack};
     color: white;
     border-radius: 10px;
@@ -30,27 +30,38 @@ const TagBox = styled.div`
   }
 `;
 
-const Line = styled.hr`
-  margin: 24px 0;
-`;
-
-const DetailTitleBox = styled.div`
-  font-size: 40px;
-  font-weight: bold;
+const Container = styled.div`
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
 `;
 
 const DetailContainer = styled.div`
-  padding: 30px 30px;
-  width: 100%;
-  box-sizing: border-box;
+  width: 60%;
+  @media screen and ${(props) => props.theme.devices.desktop}{
+
+  }
+   @media screen and ${(props) => props.theme.devices.mobile}{
+    width: 90%;
+  }
+
+  & h2{
+    margin: 20px 0;
+  }
+  & h4{
+    margin: 5px;
+    line-height: 20px;
+  }
 `;
 
 function Title({ title }: any) {
   return (
-    <DetailTitleBox>
-      <h2>{title}</h2>
-      <Line />
-    </DetailTitleBox>
+    <div>
+      <h1>{title}</h1>
+    </div>
   );
 }
 
@@ -69,7 +80,7 @@ function Tags({ categories }: any) {
 function Body({ description }: any) {
   return (
     <BodyBox>
-      <p>{description}</p>
+      <MarkdownViewer text={description}></MarkdownViewer>
     </BodyBox>
   );
 }
@@ -99,11 +110,13 @@ export default function Detail() {
   return isLoading ? (
     <Loader />
   ) : (
-    <DetailContainer>
-      <Title title={post?.title} />
-      <Tags categories={post?.categories} />
-      <Body description={post?.description} />
-      <DetailViewer files={post?.code} />
-    </DetailContainer>
+    <Container>
+      <DetailContainer>
+        <Title title={post?.title} />
+        <Tags categories={post?.categories} />
+        <Body description={post?.description} />
+        <DetailViewer files={post?.code} />
+      </DetailContainer>
+    </Container>
   );
 }
