@@ -107,7 +107,9 @@ function SliderItem({ post }: any) {
           src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
         />
         <SliderItemTitle>{post.title}</SliderItemTitle>
-        <SliderItemDescription>{post.description}</SliderItemDescription>
+        <SliderItemDescription>
+          {post.description.length > 50 ? `${post.description.slice(0, 50)}...` : post.description}
+        </SliderItemDescription>
         <SliderItemTagContainer>
           {post.categories.map(({ category }: ICategoryListProps) => (
             <SliderItemTag to={`/gallery?tag=${category._id}`}>{category.name}</SliderItemTag>
