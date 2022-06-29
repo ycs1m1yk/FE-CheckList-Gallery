@@ -6,7 +6,6 @@ import { IAllPostProps } from '@types/interface';
 import { postApi } from '@lib/api';
 import { DetailViewer } from '@lib/DetailViewer';
 import axios from 'axios';
-import { MarkdownViewer } from '../../lib/Markdown';
 
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
@@ -14,22 +13,23 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import { MarkdownViewer } from '../../lib/Markdown';
 
 const TagLink = styled(Link)`
   text-decoration: none;
 `;
 
-const CodeToggle = styled.button`
+const CodeToggle = styled.div`
   border: none;
   cursor: pointer;
-  font-size: 14px;
-  background-color: ${(props) => (props.openState ? props.theme.palette.lobelia : props.theme.palette.africanviolet)};
+  font-size: 1rem;
   transition: 0.3s ease all;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  width: 100%;
+  margin: 0 auto;
   height: 24px;
-  color: white;
+  color: black;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: under;
 `;
 
 const BodyBox = styled.div`
@@ -78,9 +78,6 @@ const DetailContainer = styled.div`
   }
 `;
 
-const CodeViewerContainer = styled.div`
-`;
-
 function Title({ title }: any) {
   return (
     <div>
@@ -109,7 +106,7 @@ function Body({ description }: any) {
   );
 }
 
-function CodeViewer({code}:{fileName:string, fileData:string}) {
+function CodeViewer({ code }:{fileName:string, fileData:string}) {
   const [openState, setOpenState] = useState<boolean>(false);
 
   function handleToggle() {
@@ -118,14 +115,16 @@ function CodeViewer({code}:{fileName:string, fileData:string}) {
 
   return (
     <>
-      <CodeToggle openState={openState} onClick={handleToggle}>{openState ? code.fileName + ' ▲' : code.fileName + ' ▼'}</CodeToggle>
-      {openState && <CodeViewerContainer openState={openState}>
+      <CodeToggle openState={openState} onClick={handleToggle}>{openState ? `${code.fileName} ▲` : `${code.fileName} ▼`}</CodeToggle>
+      {openState
+        && (
         <Viewer
-          initialValue={'```js '+code.fileData+'```'}
-          plugins={[[codeSyntaxHighlight, {highlighter: Prism}]]} />
-      </CodeViewerContainer>}
+          initialValue={`\`\`\`js ${code.fileData}\`\`\``}
+          plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+        />
+        )}
     </>
-  )
+  );
 }
 
 export default function Detail() {
@@ -163,7 +162,7 @@ export default function Detail() {
         <Title title={post?.title} />
         <Tags categories={post?.categories} />
         <Body description={post?.description} />
-        {code.map(data => <CodeViewer code={data} />)}
+        {code.map((data) => <CodeViewer code={data} />)}
         <DetailViewer files={post?.code} />
       </DetailContainer>
     </Container>
