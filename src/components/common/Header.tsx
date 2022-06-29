@@ -157,6 +157,7 @@ export default function Header() {
     if (token) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('authorId');
 
       navigate('/');
     } else {
