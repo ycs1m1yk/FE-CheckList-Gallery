@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ICodeProps } from '../types/interface';
+import { ICodeProps } from '@types/interface';
 
 const FrameViewer = styled.iframe`
     width:100%;

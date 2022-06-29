@@ -83,7 +83,7 @@ export default function Detail() {
   const getPostFromApi = async () => {
     try {
       const { data } = await postApi.getPostById(postId);
-      console.log(data);
+
       setPost(data);
     } catch (e) {
       console.log(e);
