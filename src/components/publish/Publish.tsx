@@ -221,6 +221,9 @@ export default function Publish() {
         <MarkdownEditor ref={descRef} />
         <h2>Thumbnail</h2>
         <FileUploadContainer>
+          <h3>사진 업로드 유의사항</h3>
+          <br />
+          <h4>✅ 사진은 .jpg .png 파일만 가능합니다.</h4>
           <FileUpload name="thumbnail" multiple={false} fileState={thumbnail} setFileState={setThumbnail} />
         </FileUploadContainer>
         <h2>Code</h2>
