@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
-import { lighten } from 'polished';
-import { MarkdownEditor, MarkdownViewer } from '@lib/Markdown';
+import { MarkdownEditor } from '@lib/Markdown';
 import FileUpload from '@lib/FileUpload';
 import { FileProps } from '@types/interface';
 import { postApi } from '@lib/api';
+import Redirect from '@components/common/Redirect';
 
 const Container = styled.div`
   width:100%;
@@ -148,6 +148,8 @@ const ButtonContainer = styled.div`
   }
 `;
 export default function Publish() {
+  const token = window.localStorage.getItem('token');
+
   const navigate = useNavigate();
   const [codeList, setCodeList] = useState<FileProps[]>([]);
   const [thumbnail, setThumbnail] = useState<FileProps[]>([]);
@@ -177,7 +179,7 @@ export default function Publish() {
       }
 
       // publishing 후 리다이렉트
-      const newPost = await postApi.publishPost(formData);
+      const newPost = await postApi.publishPost(formData, token);
       navigate('/gallery');
     } catch (error) {
       alert(error);
@@ -199,7 +201,7 @@ export default function Publish() {
     setTags(tags.filter((tag) => tag.id !== id));
   };
 
-  return (
+  return !token ? <Redirect /> : (
     <Container>
       <Form onSubmit={formSubmitHandler}>
         <h1>글 쓰기</h1>

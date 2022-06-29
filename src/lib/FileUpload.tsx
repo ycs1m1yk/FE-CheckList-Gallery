@@ -1,5 +1,5 @@
 import React, {
-  useState, useRef, Dispatch, SetStateAction,
+  useState, useRef,
 } from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';

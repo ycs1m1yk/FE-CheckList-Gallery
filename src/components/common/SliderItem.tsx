@@ -90,7 +90,7 @@ function SliderItem({ post }: any) {
   };
 
   return (
-    <Container key={post._id}>
+    <Container>
       <SliderItemContainer>
         <ItemHeaderContainer>
           {post.createdAt && <SliderItemCreated>{post.createdAt.slice(0, 10)}</SliderItemCreated>}

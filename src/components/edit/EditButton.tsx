@@ -2,23 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const StyledBtn = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const EditBtn = styled.button`
+  color: white;
+  border-radius: 5px;
   background-color: ${(props) => props.theme.palette.extrawhite};
+  border: ${(props) => props.theme.palette.triconblack};
   border-radius: 5px;
   box-sizing: border-box;
-  width: 7rem;
+  width: 5rem;
+  padding: 0.1rem 0rem;
   transition: all ease 0.3s;
-  border: ${(props) => props.theme.palette.triconblack};
   cursor: pointer;
-  & .btn {
-    display: none;
-  }
-  & .active {
-    display: box;
-  }
 
   &:hover {
     background-color: ${(props) => props.theme.palette.triconblack};
@@ -27,12 +21,12 @@ const StyledBtn = styled.button`
   }
 `;
 
-function PublishBtn() {
+function EditButton() {
   return (
-    <Link to="publish">
-      <StyledBtn>Publish</StyledBtn>
+    <Link to="/edit">
+      <EditBtn>Edit</EditBtn>
     </Link>
   );
 }
 
-export default PublishBtn;
+export default EditButton;
