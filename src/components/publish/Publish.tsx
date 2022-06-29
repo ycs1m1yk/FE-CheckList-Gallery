@@ -177,7 +177,7 @@ export default function Publish() {
       }
 
       // publishing 후 리다이렉트
-      const newPost = await postApi.publishPost(formData);
+      const newPost = await postApi.publishPost(formData, window.localStorage.getItem('token'));
       navigate('/gallery');
     } catch (error) {
       alert(error);
