@@ -96,6 +96,13 @@ function SliderItem({ post }: any) {
     location.href = `/gallery/${post._id}`;
   };
 
+  // Thumbnail 허용 확장자 필터링
+  const allowedFile = ['jpg', 'jpeg', 'png'];
+  const thumbnailUrl = post.thumbnail.fileUrl.split('.');
+  const filename = thumbnailUrl[thumbnailUrl.length - 1];
+
+  const imageUrl = allowedFile.includes(filename) ? post.thumbnail.fileUrl : noImage;
+
   return (
     <Container>
       <SliderItemContainer>
@@ -111,7 +118,7 @@ function SliderItem({ post }: any) {
         </ItemHeaderContainer>
         <SliderItemImage
           onClick={handleNavigate}
-          src={post.thumbnail ? post.thumbnail.fileUrl : noImage}
+          src={imageUrl}
         />
         <SliderItemTitle>{post.title}</SliderItemTitle>
         <SliderItemDescription>
