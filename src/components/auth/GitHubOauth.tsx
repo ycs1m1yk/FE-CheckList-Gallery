@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import IconW from '@images/GithubIconWhite.png';
 import PublishBtn from '@components/common/PublishBtn';
-import Edit from '../edit/EditButton';
+import EditButton from '@components/edit/EditButton';
 
 const GithubButton = styled.a`
   display: flex;
@@ -46,7 +46,7 @@ export default function GitHubOauth({ token, handleAuth }: {token: string, handl
   return (
     <>
       {token ? <PublishBtn /> : null}
-      {token ? <Edit /> : null}
+      {token ? <EditButton /> : null}
       <GithubButton onClick={handleAuth}>
         <LoginImg src={IconW} />
         <LoginP>{token ? 'Logout' : 'Login'}</LoginP>

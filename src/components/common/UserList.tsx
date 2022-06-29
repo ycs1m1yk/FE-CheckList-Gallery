@@ -7,11 +7,13 @@ import { IAuthorProps } from '@types/interface';
 const AuthorList = styled.li``;
 
 const AuthorLink = styled(Link)<{ismatch: string}>`
-  width: 100%;
+  font-size: 1.5vw;
   border-bottom: ${(props) => (props.ismatch ? `3px solid ${props.theme.palette.africanruby}` : null)};
 `;
 
-const AuthorImg = styled.img``;
+const AuthorImg = styled.img`
+  width: 3.5vw;
+`;
 
 function getUser() {
   const [users, setUsers] = useState<IAuthorProps[]>([]);

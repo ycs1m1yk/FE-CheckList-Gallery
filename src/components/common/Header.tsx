@@ -30,7 +30,8 @@ const Info = styled.div`
   font-size: 1rem;
 
   & .logo {
-    font-size: 40px;
+    width: 40%;
+    font-size: 3.5vmin;
   }
   & a {
     color: ${(props) => props.theme.palette.extrawhite};
@@ -173,7 +174,7 @@ export default function Header() {
         <div className="login-info">
           <GitHubOauth token={token} handleAuth={handleAuth} />
         </div>
-        <ul href="#" className="hamburger-bar">
+        <ul className="hamburger-bar">
           <FontAwesomeIcon icon={faBars} />
           <div className="hamburger-member">
             <GitHubOauth token={token} handleAuth={handleAuth} />
