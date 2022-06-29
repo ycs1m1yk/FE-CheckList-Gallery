@@ -16,12 +16,11 @@ export default function AuthCallback() {
           const response = data.data;
           window.localStorage.setItem('token', response.token);
           window.localStorage.setItem('user', response.username);
-          // setToken((token) => !token);
-          navigate('/');
+          navigate('/gallery');
         })
         .catch((e) => {
           alert(e);
-          navigate('/');
+          navigate('/gallery');
         });
     }
   }, []);

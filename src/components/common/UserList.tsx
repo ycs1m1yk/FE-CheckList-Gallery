@@ -4,19 +4,16 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { userApi } from '@lib/api';
 import { IAuthorProps } from '@types/interface';
 
-const AuthorList = styled.li`
-  
-`;
+const AuthorList = styled.li``;
 
-const AuthorLink = styled(Link)<{isMatch: boolean}>`
+const AuthorLink = styled(Link)<{ismatch: string}>`
   width: 100%;
-  border-bottom: ${(props) => (props.isMatch ? `3px solid ${props.theme.palette.africanruby}` : null)};
+  border-bottom: ${(props) => (props.ismatch ? `3px solid ${props.theme.palette.africanruby}` : null)};
 `;
 
 const AuthorImg = styled.img``;
 
 function getUser() {
-  const [error, setError] = useState(null);
   const [users, setUsers] = useState<IAuthorProps[]>([]);
   const [params] = useSearchParams();
   const authorId = params.get('auth');
@@ -26,7 +23,7 @@ function getUser() {
       const { data } = await userApi.getAllUser();
       setUsers(data);
     } catch (e: any) {
-      setError(e);
+      alert(e);
     }
   };
 
@@ -36,13 +33,12 @@ function getUser() {
 
   const usersList = users.map((user) => (
     <AuthorList key={user._id}>
-      <AuthorLink isMatch={authorId === user._id} to={`gallery?auth=${user._id}`}>
+      <AuthorLink ismatch={authorId === user._id ? 'true' : undefined} to={`gallery?auth=${user._id}`}>
         <AuthorImg src={user.avatar} />
         {user.username}
       </AuthorLink>
     </AuthorList>
   ));
-
   return usersList;
 }
 

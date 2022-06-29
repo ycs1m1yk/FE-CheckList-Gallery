@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import IconW from '@images/GithubIconWhite.png';
 import PublishBtn from '@components/common/PublishBtn';
@@ -40,7 +41,7 @@ const LoginImg = styled.img`
   margin-right: 0.5rem;
 `;
 
-export default function GitHubOauth({ token, handleAuth }) {
+export default function GitHubOauth({ token, handleAuth }: {token: string, handleAuth: Function}) {
   return (
     <>
       {token ? <PublishBtn /> : null}
