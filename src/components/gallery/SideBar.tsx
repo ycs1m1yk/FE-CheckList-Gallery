@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ICategoryProps } from '@types/interface';
-import { postApi, categoryApi } from '@lib/api';
+import { postApi } from '@lib/api';
 import TagList from './TagList';
 import Tags from './Tags';
 
@@ -11,34 +11,39 @@ interface TagProps extends ICategoryProps {
 
 export default function SideBar() {
   const [isLoading, setIsLoading] = useState(true);
-  const [postCount, setPostCount] = useState(0);
   const [tags, setTags] = useState<TagProps[]>([]);
   const [error, setError] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const getPosts = async () => {
+    setIsLoading(true);
     try {
-      const { data } = await postApi.getAllPosts();
-      setPostCount(data.length);
-    } catch (err: any) {
-      setError(err);
-      console.log(err);
-    }
-  };
+      const params = {
+        authorId: searchParams.get('auth'),
+      };
+      const { data } = await postApi.getAllPosts(params);
 
-  const getCategories = async () => {
-    try {
-      const { data } = await categoryApi.getAllCategory();
       const allTag = {
         _id: 'all',
         name: '전체보기',
         lowerName: '전체보기',
-        post: postCount,
+        post: data.length,
         selected: false,
         __v: 0,
       };
-      const newData = data.map((el) => ({ ...el, selected: false }));
-      setTags([allTag, ...newData]);
+      const newTagsMap = data.reduce((acc, item) => {
+        const { categories } = item;
+        categories.forEach(({ category }) => {
+          if (acc[category._id]) {
+            acc[category._id].post += 1;
+            return;
+          }
+          acc[category._id] = { ...category, post: 1, selected: false };
+        });
+        return acc;
+      }, {});
+      const newTags: TagProps[] = Object.values(newTagsMap);
+      setTags([allTag, ...newTags]);
     } catch (err: any) {
       setError(err);
       console.log(err);
@@ -64,16 +69,10 @@ export default function SideBar() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
-    if (postCount) {
-      getCategories();
-    }
-  }, [postCount]);
-
-  useEffect(() => {
-    handleSelected();
+    if (!isLoading) { handleSelected(); }
   }, [isLoading, searchParams]);
 
   return (
