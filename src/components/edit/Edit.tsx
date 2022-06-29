@@ -5,23 +5,37 @@ import { IAllPostProps } from '../../types/interface';
 
 const PostList = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  width: 360px;
+  margin: 0 auto;
 `;
 
 const PostItem = styled.div`
+  display: flex;
+  justify-content: flex-end;
   font-size: 1.3rem;
   margin: 1rem 0rem;
-  width: 30%;
+  width: 360px;
   border: 1px solid ${(props) => props.theme.palette.triconblack};
   border-radius: 1rem;
   padding: 1rem;
-  text-align: center;
-  justify-self: self-end;
 `;
 
 const DeleteButton = styled.button`
+  position: relative;
+  margin-left: 50%;
+  width:3rem;
+  height: 2rem;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: ${(props) => props.theme.palette.lobelia} ;
+  color:  ${(props) => props.theme.palette.extrawhite};
+  &:hover{
+    cursor:pointer;
+  }
 `;
 
 function Edit() {
@@ -57,6 +71,7 @@ function Edit() {
       {posts.map((post) => (
         <PostItem key={post._id}>
           {post.title}
+          {/* <DeleteButton onClick={(e) => handleDelete(post._id)}>삭제</DeleteButton> */}
           <DeleteButton onClick={(e) => handleDelete(post._id)}>삭제</DeleteButton>
         </PostItem>
       ))}
