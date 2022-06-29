@@ -16,6 +16,10 @@ const StyledTags = styled.div`
   @media (max-width: 1200px) {
     display: flex;
   };
+
+  @media ${(props) => props.theme.devices.mobile} {
+    justify-content: center;
+  } ;
 `;
 
 const Tag = styled.span`
