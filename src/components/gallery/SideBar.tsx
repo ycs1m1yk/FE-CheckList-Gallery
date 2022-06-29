@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ICategoryProps } from '@types/interface';
 import { postApi } from '@lib/api';
-import TagList from './TagList';
-import Tags from './Tags';
+import TagList from '@components/gallery/TagList';
+import Tags from '@components/gallery/Tags';
 
 interface TagProps extends ICategoryProps {
   selected: boolean;

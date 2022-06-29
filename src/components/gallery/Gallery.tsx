@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from '@components/common/Slider';
 import Loader from '@components/common/Loader';
-import SideBar from './SideBar';
+import SideBar from '@components/gallery/SideBar';
 
 const GalleryContainer = styled.div`
   width: 768px;
