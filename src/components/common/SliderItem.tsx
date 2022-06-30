@@ -46,6 +46,7 @@ const SliderItemImage = styled.img`
   height: 20rem;
   padding: 2rem;
   margin: 1rem auto;
+  object-fit: contain;
   @media screen and ${(props) => props.theme.devices.mobile} {
     width: 20rem;
     height: 15rem;
